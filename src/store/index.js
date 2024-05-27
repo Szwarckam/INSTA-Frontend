@@ -1,26 +1,24 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
 
 const state = {
-    navItems: [
-        "Home",
-        "Profile",
-        "Search"
-    ]
-} // state
+  token: "",
+}; // state
 
 const getters = {
-    GET_NAVITEMS(state) {
-        return state.navItems
-    }
+  GET_TOKEN(state) {
+    return state.token;
+  },
+}; // getters
 
-} // getters
+const actions = {}; // actions
 
-const actions = {} // actions
-
-const mutations = {} //mutations
+const mutations = {}; //mutations
 
 //export store
 
 export default createStore({
-    state, getters, actions, mutations
-})
+  state,
+  getters,
+  actions,
+  mutations,
+});
