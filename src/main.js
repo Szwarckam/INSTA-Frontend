@@ -10,7 +10,7 @@ import TabMenu from "primevue/tabmenu";
 import Menubar from "primevue/menubar";
 import Avatar from "primevue/avatar";
 import InputText from "primevue/inputtext";
-
+import Dropdown from "primevue/dropdown";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
@@ -22,6 +22,7 @@ app.component("Menubar", Menubar);
 app.component("Avatar", Avatar);
 app.component("InputText", InputText);
 app.component("TabMenu", TabMenu);
+app.component("Dropdown", Dropdown);
 // app.component('Badge', Badge);
 app.directive("ripple", Ripple);
 app.use(PrimeVue);

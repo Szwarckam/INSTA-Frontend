@@ -17,8 +17,8 @@ export default {
           },
         },
         {
-          label: "Programmatic",
-          icon: "pi pi-link",
+          label: "About",
+          icon: "pi pi-question-circle",
           command: () => {
             this.$router.push("/about");
           },
