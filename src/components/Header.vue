@@ -1,78 +1,88 @@
-<script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true,
-  },
-});
+<script >
+// import { ref } from "vue";
+// import { useRouter } from 'vue-router'
+// const router = useRouter();
+
+export default {
+    methods: {
+        onOver(e) {
+            console.log(e)
+        }
+
+    },
+    data() {
+        return {
+            isHovering: false,
+            items: [
+                {
+                    label: 'Home',
+                    icon: 'pi pi-home',
+                    command: () => {
+                        this.$router.push('/');
+                    }
+                },
+                {
+                    label: 'Programmatic',
+                    icon: 'pi pi-link',
+                    command: () => {
+                        this.$router.push('/about');
+                    }
+                },
+                {
+                    label: 'My Account',
+                    icon: 'pi pi-user ',
+                    items: [
+                        {
+                            label: 'My Profile',
+                            icon: "pi pi-user-edit",
+                            command: () => {
+                                this.$router.push('/profile');
+                            }
+                        },
+                        {
+                            label: 'Settings',
+                            icon: "pi  pi-cog",
+                            command: () => {
+                                this.$router.push('/settings');
+                            }
+                        }
+                    ]
+                }]
+        }
+    },
+
+}
+
+    ;
+
+
+
 </script>
+
 
 <template>
-  <v-card>
-    <v-layout>
-      <v-app-bar color="primary" prominent>
-        <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
-        <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-
-        <v-toolbar-title id="title">Insta</v-toolbar-title>
-
-        <v-spacer></v-spacer>
-
-        <template v-if="$vuetify.display.mdAndUp">
-          <v-btn icon="mdi-magnify" variant="text"></v-btn>
-
-          <v-btn icon="mdi-filter" variant="text"></v-btn>
-        </template>
-
-        <v-btn icon="mdi-dots-vertical" variant="text"></v-btn>
-      </v-app-bar>
-
-      <v-navigation-drawer v-model="drawer" :location="$vuetify.display.mobile ? 'bottom' : undefined" temporary>
-        <v-list :items="items"></v-list>
-      </v-navigation-drawer>
-
-      <!-- <v-main style="height: 500px"> -->
-      <!-- <v-card-text> The navigation drawer will appear from the bottom on smaller size screens. </v-card-text> -->
-      <!-- </v-main> -->
-    </v-layout>
-  </v-card>
+    <div class="card">
+        <Menubar :model="items">
+            <template #item="{ item, props, hasSubmenu }">
+                <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
+                    <a v-ripple :href="href" v-bind="props.action" @click="navigate">
+                        <span :class="item.icon" />
+                        <span class="ml-2">{{ item.label }}</span>
+                    </a>
+                </router-link>
+                <a v-else @mouseover="onOver(this)" v-ripple :href="item.url" :target="item.target" v-bind="props.action">
+                    <span @mouseout="isHovering = false" :class="item.icon, { 'pi-spin': isHovering }" />
+                    <span class="ml-2">{{ item.label }}</span>
+                    <span v-if="hasSubmenu" class="pi pi-fw pi-angle-down ml-2" />
+                </a>
+            </template>
+            <template #end>
+                <div class="flex align-items-center gap-2">
+                    <InputText placeholder="Search" type="text" class="w-8rem sm:w-auto" />
+                    <Avatar image="/images/avatar/amyelsner.png" shape="circle" />
+                </div>
+            </template>
+        </Menubar>
+    </div>
 </template>
-<script>
-export default {
-  data: () => ({
-    drawer: false,
-    group: null,
-    items: [
-      {
-        title: "Foo",
-        value: "foo",
-      },
-      {
-        title: "Bar",
-        value: "bar",
-      },
-      {
-        title: "Fizz",
-        value: "fizz",
-      },
-      {
-        title: "Buzz",
-        value: "buzz",
-      },
-    ],
-  }),
 
-  watch: {
-    group() {
-      this.drawer = false;
-    },
-  },
-};
-</script>
-<style scoped>
-#title {
-  font-family: "Pacifico", cursive;
-  font-weight: bolder;
-  font-size: 20px;
-}
-</style>
