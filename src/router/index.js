@@ -9,7 +9,7 @@ import About from "@/views/AboutView.vue";
 //lazy load - renderuje się tylko gdy jest potrzebny a nie z góry
 
 const NotFoundView = () => import("@/views/NotFoundView.vue");
-
+const Editor = () => import("@/views/EditorView.vue")
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -22,6 +22,11 @@ const router = createRouter({
       path: "/about",
       name: "about",
       component: About,
+    },
+    {
+      path: "/editor",
+      name: "editor",
+      component: Editor,
     },
     {
       path: "/:pathMatch(.*)*",

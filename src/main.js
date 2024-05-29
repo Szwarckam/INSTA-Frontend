@@ -1,4 +1,4 @@
-// import "./assets/main.css";
+import "./assets/main.css";
 import "primevue/resources/themes/md-dark-deeppurple/theme.css";
 import "primeicons/primeicons.css";
 // import router from "./router";
@@ -13,7 +13,13 @@ import InputText from "primevue/inputtext";
 import Dropdown from "primevue/dropdown";
 import App from "./App.vue";
 import router from "./router";
+import Card from 'primevue/card';
+import PanelMenu from "primevue/panelmenu";
+import Toast from "primevue/toast";
 import store from "./store";
+import Panel from "primevue/panel";
+import Listbox from "primevue/listbox";
+
 const app = createApp(App);
 
 app.use(router);
@@ -23,6 +29,10 @@ app.component("Avatar", Avatar);
 app.component("InputText", InputText);
 app.component("TabMenu", TabMenu);
 app.component("Dropdown", Dropdown);
+app.component("Card", Card);
+app.component("PanelMenu", PanelMenu);
+app.component("Toast", Toast);
+app.component("Listbox", Listbox);
 // app.component('Badge', Badge);
 app.directive("ripple", Ripple);
 app.use(PrimeVue);

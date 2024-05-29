@@ -51,7 +51,7 @@ export default {
     },
   },
   mounted() {
-    console.log("nigger");
+
     const token = this.getToken;
     console.log(token);
     if (token == "") {
