@@ -9,7 +9,10 @@ import About from "@/views/AboutView.vue";
 //lazy load - renderuje się tylko gdy jest potrzebny a nie z góry
 
 const NotFoundView = () => import("@/views/NotFoundView.vue");
-const Editor = () => import("@/views/EditorView.vue")
+const Editor = () => import("@/views/EditorView.vue");
+const Login = () => import("@/views/LoginView.vue");
+const Register = () => import("@/views/RegisterView.vue");
+const Settings = () => import("@/views/SettingsView.vue");
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -27,6 +30,21 @@ const router = createRouter({
       path: "/editor",
       name: "editor",
       component: Editor,
+    },
+    {
+      path: "/settings",
+      name: "settings",
+      component: Settings,
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: Login,
+    },
+    {
+      path: "/register",
+      name: "register",
+      component: Register,
     },
     {
       path: "/:pathMatch(.*)*",

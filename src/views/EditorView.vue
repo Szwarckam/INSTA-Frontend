@@ -1,20 +1,18 @@
 <template>
   <div class="editor-container">
-    <div class="croper-container">
-      <Croper />
+    <div class="img-container">
+      <ImageComp />
     </div>
     <div class="card-container">
       <EditorOptions />
-
     </div>
-
   </div>
 </template>
 
 <script setup>
-import Croper from '@/components/Croper.vue';
-import EditorOptions from '@/components/EditorOptions.vue';
-
+// import Croper from "@/components/Croper.vue";
+import ImageComp from "@/components/ImageComp.vue";
+import EditorOptions from "@/components/EditorOptions.vue";
 </script>
 <style>
 .options {
@@ -40,7 +38,7 @@ import EditorOptions from '@/components/EditorOptions.vue';
   height: 80vh;
 }
 
-/* .croper-container {
+/* .img-container {
 
   padding-top: 2vh;
   display: flex;
