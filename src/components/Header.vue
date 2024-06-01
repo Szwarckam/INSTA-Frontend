@@ -1,127 +1,120 @@
-<script>
-// import { ref } from "vue";
-// import { useRouter } from 'vue-router'
-// const router = useRouter();
-
-export default {
-  methods: {},
-  data() {
-    return {
-      isHovering: false,
-      items: [
-        {
-          label: "Home",
-          icon: "pi pi-home",
-          command: () => {
-            this.$router.push("/");
-          },
-        },
-        {
-          label: "About",
-          icon: "pi pi-question-circle",
-          command: () => {
-            this.$router.push("/about");
-          },
-        },
-        {
-          label: "My Profile",
-          icon: "pi pi-user-edit",
-          command: () => {
-            this.$router.push("/profile");
-          },
-        },
-        {
-          label: "Settings",
-          icon: "pi  pi-cog",
-          command: () => {
-            this.$router.push("/settings");
-          },
-        },
-        // {
-        //   label: "My Account",
-        //   icon: "pi pi-user ",
-        //   items: [],
-        // },
-      ],
-    };
-  },
-  computed: {
-    getToken() {
-      return this.$store.getters.GET_TOKEN;
-    },
-  },
-  mounted() {
-
-    const token = this.getToken;
-    console.log(token);
-    if (token == "") {
-      this.items.push({
-        label: "Log In",
-        icon: "pi pi-sign-in",
-        command: () => {
-          this.$router.push("/login");
-        },
-      });
-    } else {
-      this.items.push({
-        label: "Log Out",
-        icon: "pi pi-sign-out",
-        command: () => {
-          this.$router.push("/logout");
-        },
-      });
-    }
-  },
-};
-</script>
-
 <template>
   <div class="card">
-    <!-- <TabMenu :model="items" /> -->
-
-    <TabMenu :model="items">
-      <!-- <template #start> -->
-
-      <!-- </template> -->
-
-      <template #item="{ item, props }">
-        <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
-          <Dropdown>
-            <img alt="dropdown icon" src="/icons8-instagram-ink-32.png" style="backgroundcolor: var(--primary-color)" />
-          </Dropdown>
-        </router-link>
-        <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
-          <a v-ripple :href="href" v-bind="props.action" @click="navigate">
-            <span v-bind="props.icon" />
-            <span v-bind="props.label">{{ item.label }}</span>
-          </a>
-        </router-link>
-        <a v-else v-ripple :href="item.url" :target="item.target" v-bind="props.action">
-          <span v-bind="props.icon" />
-          <span v-bind="props.label">{{ item.label }}</span>
-        </a>
-      </template>
-    </TabMenu>
-    <!-- <Menubar :model="items">
+    <Menubar :model="menuItems">
       <template #item="{ item, props, hasSubmenu }">
-        <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
+        <router-link
+          v-if="item.route && item.label != 'Login' && item.label != 'Logout' && item.label != 'My profile'"
+          v-slot="{ href, navigate }"
+          :to="item.route"
+          custom
+        >
           <a v-ripple :href="href" v-bind="props.action" @click="navigate">
             <span :class="item.icon" />
             <span class="ml-2">{{ item.label }}</span>
           </a>
         </router-link>
-        <a v-else v-ripple :href="item.url" :target="item.target" v-bind="props.action">
-          <span @mouseout="isHovering = false" :class="item.icon" />
+        <a v-else-if="item.label === 'My profile' && isLogged" v-ripple :href="item.route" v-bind="props.action">
+          <span :class="item.icon" />
+          <span class="ml-2">{{ item.label }}</span>
+          <!-- <span>Debug: Login, isLogged: {{ isLogged }}</span> -->
+        </a>
+        <a
+          v-else-if="item.label === 'Login' && !isLogged"
+          @click="logoutUser"
+          v-ripple
+          :href="item.route"
+          v-bind="props.action"
+        >
+          <span :class="item.icon" />
+          <span class="ml-2">{{ item.label }}</span>
+          <!-- <span>Debug: Logout, isLogged: {{ isLogged }}</span> -->
+        </a>
+        <a
+          v-else-if="item.label === 'Logout' && isLogged"
+          @click="logoutUser"
+          v-ripple
+          :href="item.route"
+          v-bind="props.action"
+        >
+          <span :class="item.icon" />
+          <span class="ml-2">{{ item.label }}</span>
+          <!-- <span>Debug: Logout, isLogged: {{ isLogged }}</span> -->
+        </a>
+        <a
+          v-else-if="item.label != 'Login' && item.label != 'Logout' && item.label != 'My profile'"
+          v-ripple
+          :href="item.route"
+          :target="item.target"
+          v-bind="props.action"
+        >
+          <span :class="item.icon" />
           <span class="ml-2">{{ item.label }}</span>
           <span v-if="hasSubmenu" class="pi pi-fw pi-angle-down ml-2" />
         </a>
       </template>
-
-      <template #end>
-        <div class="flex align-items-center gap-2">
-          <Avatar icon="pi pi-user" class="mr-2" size="large" shape="circle" />
-        </div>
-      </template>
-    </Menubar> -->
+    </Menubar>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      logged: false,
+      menuItems: [
+        {
+          label: "Home",
+          icon: "pi pi-home",
+          route: "/",
+        },
+        {
+          label: "My profile",
+          icon: "pi pi-user",
+          items: [
+            {
+              label: "My album",
+              icon: "pi pi-home",
+              route: "/profile",
+            },
+            {
+              label: "Settings",
+              icon: "pi pi-spin pi-cog",
+              route: "/settings",
+            },
+          ],
+        },
+        {
+          label: "Login",
+          icon: "pi pi-link",
+          route: "/login",
+        },
+        {
+          label: "Logout",
+          icon: "pi pi-link",
+        },
+      ],
+    };
+  },
+  methods: {
+    showToast(type, message) {
+      this.$toast.add({ severity: type, summary: "", detail: message, life: 3000 });
+    },
+    async logoutUser() {
+      console.log("Log out");
+      const result = await this.$store.dispatch("GET_LOGOUT_USER", this.$store.getters.GET_TOKEN);
+      console.log(result);
+      if (result.status >= 400 && result.status < 500) {
+        this.showToast("error", result.message);
+      } else if (result.status >= 200 && result.status < 300) {
+        this.showToast("success", result.message);
+        this.$router.push("/");
+      }
+    },
+  },
+  computed: {
+    isLogged() {
+      return this.$store.getters.GET_TOKEN !== "";
+    },
+  },
+};
+</script>

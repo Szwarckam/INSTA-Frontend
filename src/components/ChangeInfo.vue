@@ -30,13 +30,13 @@
 .info-container {
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  width: 100%;
   align-items: center;
   justify-content: flex-start;
   padding-top: 30px;
 }
 .inner-info {
-  width: 50vh;
+  width: 50vw;
 }
 .btn {
   left: 50%;
@@ -49,10 +49,17 @@ export default {
   data() {
     return {
       active: 0,
-      name: null,
-      lastName: null,
-      bio: null,
+      name: "",
+      lastName: "",
     };
+  },
+  mounted() {
+    setTimeout(() => {
+      console.log("Mounted");
+      console.log("Name: ", this.$store.getters.GET_NAME);
+      this.name = this.$store.getters.GET_NAME;
+      this.lastName = this.$store.getters.GET_LAST_NAME;
+    }, 1005);
   },
 };
 </script>

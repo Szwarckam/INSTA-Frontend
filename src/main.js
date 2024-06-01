@@ -1,5 +1,8 @@
 import "./assets/main.css";
 import "primevue/resources/themes/md-dark-deeppurple/theme.css";
+import "primeflex/primeflex.css";
+
+import "primevue/resources/primevue.min.css"; /* Deprecated */
 import "primeicons/primeicons.css";
 // import router from "./router";
 import { createApp } from "vue";
@@ -31,8 +34,14 @@ import Accordion from "primevue/accordion";
 import ProgressBar from "primevue/progressbar";
 import FileUpload from "primevue/fileupload";
 import Editor from "primevue/editor";
+import Password from "primevue/password";
+import InlineMessage from "primevue/inlinemessage";
+import ToastService from "primevue/toastservice";
+// import Toast from "primevue/toast";
 const app = createApp(App);
 import { validate } from "vee-validate";
+import ProgressSpinner from "primevue/progressspinner";
+import Dialog from "primevue/dialog";
 // import VeeValidate from "vee-validate";
 
 app.use(validate);
@@ -55,10 +64,15 @@ app.component("FloatLabel", FloatLabel);
 app.component("InputMask", InputMask);
 app.component("AccordionTab", AccordionTab);
 app.component("Accordion", Accordion);
+app.component("Dialog", Dialog);
 app.component("ProgressBar", ProgressBar);
 app.component("FileUpload", FileUpload);
+app.component("Password", Password);
 app.component("Editor", Editor);
 app.component("Badge", Badge);
+app.component("InlineMessage", InlineMessage);
+app.component("ProgressSpinner", ProgressSpinner);
 app.directive("ripple", Ripple);
 app.use(PrimeVue);
+app.use(ToastService);
 app.mount("#app");

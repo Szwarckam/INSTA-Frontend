@@ -1,13 +1,38 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
+<script>
 import HelloWorld from "@/components/HelloWorld.vue";
 import Header from "@/components/Header.vue";
+import Spinner from "@/components/Spinner.vue";
+import Toast from "primevue/toast";
+export default {
+  components: {
+    HelloWorld,
+    Header,
+    Spinner,
+    Toast,
+  },
+  computed: {
+    isVisible() {
+      return this.$store.getters.GET_VISIBLE;
+    },
+  },
+  methods: {
+    show_Error() {
+      this.$toast.add({ severity: "error", summary: "Error Message", detail: "Message Content", life: 3000 });
+    },
+  },
+  data() {
+    return {
+      visible: false,
+    };
+  },
+};
 </script>
 
 <template>
+  <Toast />
   <Header />
-
   <RouterView />
+  <Spinner :visible="isVisible" />
 </template>
 
 <style scoped>

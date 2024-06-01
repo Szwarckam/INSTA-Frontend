@@ -1,24 +1,13 @@
 import { createStore } from "vuex";
+import overall from "./overall";
+import users from "./users";
 
-const state = {
-  token: "",
-}; // state
-
-const getters = {
-  GET_TOKEN(state) {
-    return state.token;
-  },
-}; // getters
-
-const actions = {}; // actions
-
-const mutations = {}; //mutations
-
-//export store
+const modules = {
+  users,
+  overall,
+  // kolejne moduły store
+};
 
 export default createStore({
-  state,
-  getters,
-  actions,
-  mutations,
+  modules,
 });

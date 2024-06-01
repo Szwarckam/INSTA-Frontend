@@ -13,6 +13,7 @@ const Editor = () => import("@/views/EditorView.vue");
 const Login = () => import("@/views/LoginView.vue");
 const Register = () => import("@/views/RegisterView.vue");
 const Settings = () => import("@/views/SettingsView.vue");
+const Auth = () => import("@/views/AuthView.vue");
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -45,6 +46,11 @@ const router = createRouter({
       path: "/register",
       name: "register",
       component: Register,
+    },
+    {
+      path: "/auth",
+      name: "auth",
+      component: Auth,
     },
     {
       path: "/:pathMatch(.*)*",
