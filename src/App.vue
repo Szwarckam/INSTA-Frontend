@@ -15,6 +15,20 @@ export default {
       return this.$store.getters.GET_VISIBLE;
     },
   },
+  created() {
+    const cookies = document.cookie.split(";");
+    let token = null;
+    cookies.forEach((cookie) => {
+      const [name, value] = cookie.trim().split("=");
+      if (name === "token") {
+        token = value;
+      }
+    });
+
+    if (token) {
+      this.$store.commit("SET_TOKEN", token);
+    }
+  },
   methods: {
     show_Error() {
       this.$toast.add({ severity: "error", summary: "Error Message", detail: "Message Content", life: 3000 });

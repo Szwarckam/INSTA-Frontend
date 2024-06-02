@@ -56,7 +56,7 @@
               :invalid="!isPassValid && passTouched"
             />
             <!-- <Password id="pass" v-model="pass" @input="validatPass" :invalid="!isPassValid && passTouched" /> -->
-            <!-- <label for="pass">Password</label> -->
+            <label for="pass">Password</label>
           </FloatLabel>
         </InputGroup>
         <!-- <InlineMessage v-if="!isPassValid && passTouched" severity="error"
@@ -98,6 +98,14 @@ export default {
       emailRegex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       passRegex: /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/,
     };
+  },
+  created() {
+    console.log("Created");
+    console.log(this.$store.getters.GET_TOKEN);
+    if (this.$store.getters.GET_TOKEN !== "") {
+      showToast("info", "You are already logged in");
+      this.$router.push("/");
+    }
   },
   methods: {
     showToast(type, message) {

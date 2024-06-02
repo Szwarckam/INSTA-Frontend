@@ -42,6 +42,7 @@ const app = createApp(App);
 import { validate } from "vee-validate";
 import ProgressSpinner from "primevue/progressspinner";
 import Dialog from "primevue/dialog";
+import Tooltip from "primevue/tooltip";
 // import VeeValidate from "vee-validate";
 
 app.use(validate);
@@ -59,6 +60,8 @@ app.component("Listbox", Listbox);
 app.component("Button", Button);
 app.component("Image", Image);
 app.component("InputGroup", InputGroup);
+app.component("Tooltip", Tooltip);
+app.directive("tooltip", Tooltip);
 app.component("InputGroupAddon", InputGroupAddon);
 app.component("FloatLabel", FloatLabel);
 app.component("InputMask", InputMask);

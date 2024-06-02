@@ -1,4 +1,4 @@
-import { registerUser } from "@/api";
+import { getPhotoList } from "@/api";
 // import { overload } from "quill/core/quill";
 
 const overall = {
@@ -6,6 +6,7 @@ const overall = {
   state() {
     return {
       visible: false,
+      photos: [],
     };
   },
 

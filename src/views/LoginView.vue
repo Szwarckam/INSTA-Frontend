@@ -26,6 +26,7 @@
               strongLabel="Complex password"
               :invalid="!isPassValid && passTouched"
             />
+            <label for="pass">Password</label>
           </FloatLabel>
         </InputGroup>
         <span v-if="!isPassValid && passTouched" class="error">
@@ -54,6 +55,14 @@ export default {
       emailRegex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       passRegex: /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/,
     };
+  },
+  created() {
+    console.log("Created");
+    console.log(this.$store.getters.GET_TOKEN);
+    if (this.$store.getters.GET_TOKEN !== "") {
+      showToast("info", "You are already logged in");
+      this.$router.push("/");
+    }
   },
   methods: {
     showToast(type, message) {

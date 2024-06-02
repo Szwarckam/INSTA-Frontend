@@ -1,4 +1,13 @@
-import { registerUser, loginUser, logoutUser, profileInfo } from "@/api";
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+  profileInfo,
+  getPhotoList,
+  changePassword,
+  changeUserData,
+  upladProfilePhoto,
+} from "@/api";
 
 const users = {
   //state
@@ -8,7 +17,7 @@ const users = {
       name: "",
       lastName: "",
       email: "",
-      bio: "1. Zapraszam do odkrywania świata razem ze mną na Instagramie!  #podróże #zwiedzanie #fotografie 2. Zdjęcia z podróży i ciekawe miejsca - wszystko to znajdziesz na moim Instagramie!  #sightseeing #travelphotography #instatravel 3. Odkrywaj świat ze mną na Instagramie! Znajdziesz tu wiele inspirujących fotografii z podróży.  #zwiedzanie #fotografianatury #podróże",
+      bio: "test123",
     };
   },
 
@@ -62,6 +71,24 @@ const users = {
 
   // tu zapytania do serwera z pomocą naszego api
   actions: {
+    async PHOTOS_LIST({ commit }) {
+      console.log("POBIERANIE LISTY ZDJĘĆ:");
+      commit("SET_VISIBLE", true);
+      try {
+        const response = await getPhotoList(token);
+        console.log("response.data", response);
+        commit("SET_VISIBLE", false);
+        return response;
+      } catch (err) {
+        if (err.response) {
+          console.error("Błąd serwera:", err.response.data);
+          commit("SET_VISIBLE", false);
+          return err.response.data;
+        }
+      }
+      // commit("SET_VISIBLE", false);
+      return false;
+    },
     async POST_REGISTER_USER({ commit }, userData) {
       console.log("POST");
       console.log("Ustawienie visible:");
@@ -104,6 +131,64 @@ const users = {
         }
       }
     },
+    async POST_UPLOAD_PROFILE_PHOTO({ commit }, userData) {
+      console.log("Wysyłanie zdjęcia profilowego");
+      commit("SET_VISIBLE", true);
+      try {
+        const response = await upladProfilePhoto(userData);
+        console.log("response.data", response);
+        commit("SET_VISIBLE", false);
+        console.log(response);
+        return response;
+      } catch (err) {
+        if (err.response) {
+          console.error("Błąd serwera:", err.response.data);
+          commit("SET_VISIBLE", false);
+          return err.response.data;
+        }
+      }
+    },
+    //POST_CHANGE_USER_DATA
+    async POST_CHANGE_USER_DATA({ commit }, data) {
+      console.log("Zmiana danych użytkownika");
+      commit("SET_VISIBLE", true);
+      // commit("SHOW_ERROR", true);
+      // showError();
+      try {
+        // console.log("POST: ", token);
+        const response = await changeUserData(data);
+        console.log("response.data", response);
+        commit("SET_VISIBLE", false);
+        console.log(response);
+        return response;
+      } catch (err) {
+        if (err.response) {
+          console.error("Błąd serwera:", err.response.data);
+          commit("SET_VISIBLE", false);
+          return err.response.data;
+        }
+      }
+    },
+    async POST_CHANGE_PASS({ commit }, data) {
+      console.log("Zmiana hasła");
+      commit("SET_VISIBLE", true);
+      // commit("SHOW_ERROR", true);
+      // showError();
+      try {
+        // console.log("POST: ", token);
+        const response = await changePassword(data);
+        console.log("response.data", response);
+        commit("SET_VISIBLE", false);
+        console.log(response);
+        return response;
+      } catch (err) {
+        if (err.response) {
+          console.error("Błąd serwera:", err.response.data);
+          commit("SET_VISIBLE", false);
+          return err.response.data;
+        }
+      }
+    },
     async POST_LOGIN_USER({ commit }, userData) {
       console.log("POST");
       console.log("Logowanie:");
@@ -114,6 +199,9 @@ const users = {
         commit("SET_VISIBLE", false);
         // if (response.token) {
         commit("SET_TOKEN", response.token);
+        const expiryDate = new Date();
+        expiryDate.setTime(expiryDate.getTime() + 24 * 60 * 60 * 1000); // 24 hours
+        document.cookie = `token=${response.token}; expires=${expiryDate.toUTCString()}; path=/`;
         // }
         // console.log(response.data);
 
@@ -138,6 +226,7 @@ const users = {
         commit("SET_VISIBLE", false);
         // if (response.token) {
         commit("SET_TOKEN", "");
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         // }
         // console.log(response.data);
 

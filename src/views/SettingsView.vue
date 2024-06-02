@@ -17,9 +17,11 @@
         <UploadProfile />
       </AccordionTab>
       <AccordionTab header="3. Opis konta">
-        <Editor v-model="userBio" editorStyle="height: 320px" />
+        <ChangeBio />
       </AccordionTab>
-      <AccordionTab header="4. Zmiana hasła"> </AccordionTab>
+      <AccordionTab header="4. Zmiana hasła">
+        <ChangePass />
+      </AccordionTab>
     </Accordion>
   </div>
 </template>
@@ -35,31 +37,32 @@
 <script>
 import UploadProfile from "@/components/UploadProfile.vue";
 import ChangeInfo from "@/components/ChangeInfo.vue";
+import ChangePass from "@/components/ChangePass.vue";
+import ChangeBio from "@/components/ChangeBio.vue";
 export default {
   data() {
     return {
       active: 0,
-      userBio: "",
     };
   },
   components: {
     UploadProfile,
     ChangeInfo,
+    ChangePass,
+    ChangeBio,
   },
   methods: {
-    // checkBio() {
-    //   console.log(this.bio);
-    // },
     showToast(type, message) {
       this.$toast.add({ severity: type, summary: "", detail: message, life: 3000 });
     },
+    changeUserBio() {},
   },
   computed: {
     // getBio() {
     //   this.bio = this.$store.getters.GET_BIO;
     // },
   },
-  async created() {
+  async mounted() {
     console.log("Created");
     console.log("GET data successful!");
     const result = await this.$store.dispatch("POST_PROFILE_INFO", this.$store.getters.GET_TOKEN);
@@ -69,11 +72,12 @@ export default {
       this.showToast("error", result.message);
     } else if (result.status >= 200 && result.status < 300) {
       this.$store.commit("SET_USER_DATA", result.profileData);
-      this.userBio = this.$store.getters.GET_BIO;
-      console.log(this.userBio);
-      setInterval(() => {
-        console.log(this.userBio);
-      }, 100);
+      this.bio = this.$store.getters.GET_BIO;
+      console.log(this.bio);
+      console.log(this.$store.getters.GET_TOKEN);
+      // setInterval(() => {
+      //   console.log(this.userBio);
+      // }, 100);
       // this.showToast("success", result.message);
       // this.$router.push("/login");
     }
