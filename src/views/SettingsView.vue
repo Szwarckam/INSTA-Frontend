@@ -65,7 +65,8 @@ export default {
   async mounted() {
     console.log("Created");
     console.log("GET data successful!");
-    const result = await this.$store.dispatch("POST_PROFILE_INFO", this.$store.getters.GET_TOKEN);
+    console.log("[DEBBUGER] ", this.$store.getters.GET_EMAIL);
+    const result = await this.$store.dispatch("POST_PROFILE_INFO", this.$store.getters.GET_EMAIL);
     console.log(result);
     if (result.status >= 400 && result.status < 500) {
       this.$router.push("/login");

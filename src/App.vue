@@ -27,7 +27,7 @@ export default {
 
     if (token) {
       this.$store.commit("SET_TOKEN", token);
-      const result = await this.$store.dispatch("POST_PROFILE_INFO", this.$store.getters.GET_TOKEN);
+      const result = await this.$store.dispatch("POST_PROFILE_INFO", this.$store.getters.GET_EMAIL);
       console.log(result);
     }
   },
@@ -45,7 +45,7 @@ export default {
 </script>
 
 <template>
-  <Toast />
+  <Toast class="mt-2" />
   <Header />
   <RouterView />
   <Spinner :visible="isVisible" />

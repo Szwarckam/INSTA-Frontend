@@ -101,7 +101,7 @@ export default {
     SpeedDial,
   },
   async created() {
-    const result = await this.$store.dispatch("POST_PROFILE_INFO", this.$store.getters.GET_TOKEN);
+    const result = await this.$store.dispatch("POST_PROFILE_INFO", this.$store.getters.GET_EMAIL);
     console.log(result);
     if (result) {
       this.name = this.$store.getters.GET_USER_DATA.name;

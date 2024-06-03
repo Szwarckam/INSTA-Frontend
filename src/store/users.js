@@ -17,7 +17,7 @@ const users = {
       name: "",
       lastName: "",
       email: "",
-      bio: "test123",
+      bio: "",
     };
   },
 

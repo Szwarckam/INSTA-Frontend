@@ -1,7 +1,7 @@
 <template>
   <div class="photos-container">
     <MyUserInfo />
-
+    <Galleria />
     <MyAlbum />
   </div>
 </template>
@@ -9,10 +9,12 @@
 <script>
 import MyAlbum from "@/components/MyAlbum.vue";
 import MyUserInfo from "@/components/MyUserInfo.vue";
+import Galleria from "@/components/Galleria.vue";
 export default {
   components: {
     MyAlbum,
     MyUserInfo,
+    Galleria,
   },
   data() {
     return {

@@ -1,6 +1,7 @@
 <template>
   <div class="photos-container">
     <Button
+      :style="{ display: $store.getters.GET_TOKEN !== '' ? 'inline-block' : 'none' }"
       severity="help"
       icon="pi pi-plus-circle"
       @click="this.$router.push('/addPhoto')"

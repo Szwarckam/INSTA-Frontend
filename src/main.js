@@ -38,6 +38,8 @@ import Password from "primevue/password";
 import InlineMessage from "primevue/inlinemessage";
 import ToastService from "primevue/toastservice";
 import Textarea from "primevue/textarea";
+
+import Galleria from "primevue/galleria";
 // import Toast from "primevue/toast";
 const app = createApp(App);
 import { validate } from "vee-validate";
@@ -45,7 +47,6 @@ import ProgressSpinner from "primevue/progressspinner";
 import Dialog from "primevue/dialog";
 import Tooltip from "primevue/tooltip";
 
-app.directive("tooltip", Tooltip);
 // import VeeValidate from "vee-validate";
 
 app.use(validate);
@@ -70,6 +71,7 @@ app.component("InputGroupAddon", InputGroupAddon);
 app.component("FloatLabel", FloatLabel);
 app.component("InputMask", InputMask);
 app.component("AccordionTab", AccordionTab);
+app.component("Galleria", Galleria);
 app.component("Accordion", Accordion);
 app.component("Dialog", Dialog);
 app.component("ProgressBar", ProgressBar);

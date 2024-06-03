@@ -72,7 +72,7 @@ const changePassword = (object) => post("http://localhost:3000/api/user/changepa
 const changeUserData = (object) => patch("http://localhost:3000/api/profile", object);
 const logoutUser = (token) => get("http://localhost:3000/api/logout", token);
 const leaveLike = (object) => post("http://localhost:3000/api/photos/like", object);
-const profileInfo = () => get("http://localhost:3000/api/profile");
+const profileInfo = (email) => get(`http://localhost:3000/api/profile/${email}`);
 const photosList = () => get("http://localhost:3000/api/photos");
 
 export { registerUser, loginUser, logoutUser, profileInfo, changePassword, changeUserData, photosList, leaveLike };

@@ -12,8 +12,14 @@
       </template>
     </Editor> -->
     <FloatLabel>
-      <Textarea v-model="bio" rows="5" cols="100" style="resize: none" :invalid="!isBioValid && bioTouched" />
-      <label>Username</label>
+      <Textarea
+        v-model="getBio"
+        cols="100"
+        rows="10"
+        style="resize: vertical; height: fit-content"
+        :invalid="!isBioValid && bioTouched"
+      />
+      <label>Bio</label>
     </FloatLabel>
 
     <span v-if="!isBioValid && bioTouched" class="error">Bio must contain at least 2 signs</span>
@@ -58,15 +64,20 @@
 export default {
   data() {
     return {
-      bio: "<div>Hello World!</div><div>PrimeVue <b>Editor</b> Rocks</div><div><br></div>",
+      bio: "",
       isBioValid: true,
       bioTouched: false,
     };
   },
-  mounted() {
+  computed: {
+    getBio() {
+      this.bio = this.$store.getters.GET_BIO;
+      console.log(this.bio);
+      return this.bio;
+    },
+  },
+  created() {
     console.log("EDyto zamonotway");
-    this.bio = this.$store.getters.GET_BIO;
-    console.log(this.bio);
   },
   methods: {
     showToast(type, message) {
