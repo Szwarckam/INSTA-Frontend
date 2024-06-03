@@ -1,21 +1,18 @@
 <template>
   <div class="photos-container">
-    <Button
-      severity="help"
-      icon="pi pi-plus-circle"
-      @click="this.$router.push('/addPhoto')"
-      class="btn-edit2"
-      v-tooltip.left="'Add photo'"
-    />
-    <PhotosCards />
+    <MyUserInfo />
+
+    <MyAlbum />
   </div>
 </template>
 <style></style>
 <script>
-import PhotosCards from "@/components/PhotosCards.vue";
+import MyAlbum from "@/components/MyAlbum.vue";
+import MyUserInfo from "@/components/MyUserInfo.vue";
 export default {
   components: {
-    PhotosCards,
+    MyAlbum,
+    MyUserInfo,
   },
   data() {
     return {
@@ -39,9 +36,5 @@ export default {
 .photos-container {
   width: calc(100vw - 40px);
   margin: 20px;
-}
-.btn-edit2 {
-  position: absolute;
-  right: 40px;
 }
 </style>

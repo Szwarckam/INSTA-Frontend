@@ -37,12 +37,15 @@ import Editor from "primevue/editor";
 import Password from "primevue/password";
 import InlineMessage from "primevue/inlinemessage";
 import ToastService from "primevue/toastservice";
+import Textarea from "primevue/textarea";
 // import Toast from "primevue/toast";
 const app = createApp(App);
 import { validate } from "vee-validate";
 import ProgressSpinner from "primevue/progressspinner";
 import Dialog from "primevue/dialog";
 import Tooltip from "primevue/tooltip";
+
+app.directive("tooltip", Tooltip);
 // import VeeValidate from "vee-validate";
 
 app.use(validate);
@@ -53,6 +56,7 @@ app.component("Avatar", Avatar);
 app.component("InputText", InputText);
 app.component("TabMenu", TabMenu);
 app.component("Dropdown", Dropdown);
+app.component("Textarea", Textarea);
 app.component("Card", Card);
 app.component("PanelMenu", PanelMenu);
 app.component("Toast", Toast);

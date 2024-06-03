@@ -6,6 +6,7 @@ const post = async (url, object) => {
     setTimeout(async () => {
       try {
         const headers = store.getters.GET_TOKEN != "" ? { Authorization: ` ${store.getters.GET_TOKEN}` } : {};
+        console.log(headers);
         const response = await axios.post(url, object, { headers });
         console.log("axios", response.data);
         resolve(response.data);
@@ -20,7 +21,7 @@ const post = async (url, object) => {
         }
         reject(err);
       }
-    }, 1000);
+    }, 200);
   });
 };
 
@@ -36,7 +37,7 @@ const get = async (url) => {
         console.log(err);
         reject(err);
       }
-    }, 1000);
+    }, 200);
   });
 };
 
@@ -60,25 +61,18 @@ const patch = async (url, object) => {
         }
         reject(err);
       }
-    }, 1000);
+    }, 200);
   });
 };
 
 const registerUser = (object) => post("http://localhost:3000/api/user/register", object);
 const loginUser = (object) => post("http://localhost:3000/api/user/login", object);
 const changePassword = (object) => post("http://localhost:3000/api/user/changepass", object);
-const upladProfilePhoto = (object) => post("http://localhost:3000/api/profile", object);
+// const upladProfilePhoto = (object) => post("http://localhost:3000/api/profile", object);
 const changeUserData = (object) => patch("http://localhost:3000/api/profile", object);
 const logoutUser = (token) => get("http://localhost:3000/api/logout", token);
-const profileInfo = (token) => get("http://localhost:3000/api/profile", token);
-const getPhotoList = () => get("http://localhost:3000/api/photos");
-export {
-  registerUser,
-  loginUser,
-  logoutUser,
-  profileInfo,
-  getPhotoList,
-  changePassword,
-  changeUserData,
-  upladProfilePhoto,
-};
+const leaveLike = (object) => post("http://localhost:3000/api/photos/like", object);
+const profileInfo = () => get("http://localhost:3000/api/profile");
+const photosList = () => get("http://localhost:3000/api/photos");
+
+export { registerUser, loginUser, logoutUser, profileInfo, changePassword, changeUserData, photosList, leaveLike };

@@ -80,14 +80,13 @@ export default {
         const result = await this.$store.dispatch("POST_CHANGE_USER_DATA", {
           name: this.name,
           lastName: this.lastName,
-          bio: this.$store.getters.GET_TOKEN,
+          bio: this.$store.getters.GET_BIO,
         });
         console.log(result);
         if (result.status == 404) {
           this.showToast("error", result.message);
         } else if (result.status >= 200 && result.status < 300) {
           this.showToast("success", result.message);
-          this.$store.commit("SET_USER_DATA", result.profileData);
           this.$router.push("/settings");
         }
       } else {

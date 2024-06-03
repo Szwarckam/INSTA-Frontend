@@ -9,10 +9,31 @@
   </div>
 </template>
 
-<script setup>
+<script>
 // import Croper from "@/components/Croper.vue";
 import ImageComp from "@/components/ImageComp.vue";
 import EditorOptions from "@/components/EditorOptions.vue";
+export default {
+  data() {
+    return {
+      active: 0,
+    };
+  },
+  components: {
+    EditorOptions,
+    ImageComp,
+  },
+  methods: {
+    showToast(type, message) {
+      this.$toast.add({ severity: type, summary: "", detail: message, life: 3000 });
+    },
+  },
+  computed: {
+    // getBio() {
+    //   this.bio = this.$store.getters.GET_BIO;
+    // },
+  },
+};
 </script>
 <style>
 .options {

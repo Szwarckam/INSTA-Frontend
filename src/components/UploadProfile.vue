@@ -46,7 +46,7 @@ export default {
       //   this.showToast("error", result.message);
       // } else if (result.status >= 200 && result.status < 300) {
       //   this.showToast("success", result.message);
-      //   this.$store.commit("SET_USER_DATA", result.profileData);
+
       //   this.$router.push("/");
       // }
       // } else {

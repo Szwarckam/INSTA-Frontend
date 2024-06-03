@@ -3,11 +3,11 @@ import {
   loginUser,
   logoutUser,
   profileInfo,
-  getPhotoList,
   changePassword,
   changeUserData,
-  upladProfilePhoto,
+  // upladProfilePhoto,
 } from "@/api";
+import { email } from "@vee-validate/rules";
 
 const users = {
   //state
@@ -30,7 +30,7 @@ const users = {
       state.name = userData.name;
       state.lastName = userData.lastName;
       state.email = userData.email;
-      // state.bio = userData.bio;
+      state.bio = userData.bio;
     },
     SET_NAME(state, name) {
       state.name = name;
@@ -67,28 +67,18 @@ const users = {
     GET_BIO(state) {
       return state.bio;
     },
+    GET_USER_DATA(state) {
+      return {
+        name: state.name,
+        lastName: state.lastName,
+        email: state.email,
+        bio: state.bio,
+      };
+    },
   },
 
   // tu zapytania do serwera z pomocą naszego api
   actions: {
-    async PHOTOS_LIST({ commit }) {
-      console.log("POBIERANIE LISTY ZDJĘĆ:");
-      commit("SET_VISIBLE", true);
-      try {
-        const response = await getPhotoList(token);
-        console.log("response.data", response);
-        commit("SET_VISIBLE", false);
-        return response;
-      } catch (err) {
-        if (err.response) {
-          console.error("Błąd serwera:", err.response.data);
-          commit("SET_VISIBLE", false);
-          return err.response.data;
-        }
-      }
-      // commit("SET_VISIBLE", false);
-      return false;
-    },
     async POST_REGISTER_USER({ commit }, userData) {
       console.log("POST");
       console.log("Ustawienie visible:");
@@ -119,7 +109,10 @@ const users = {
       try {
         const response = await profileInfo(userData);
         console.log("response.data", response);
+        commit("SET_USER_DATA", response.profileData);
+        // console.log(this.$store.getters.GET_EMAIL);
         commit("SET_VISIBLE", false);
+
         console.log(response);
         return response;
       } catch (err) {
@@ -158,6 +151,7 @@ const users = {
         // console.log("POST: ", token);
         const response = await changeUserData(data);
         console.log("response.data", response);
+        commit("SET_USER_DATA", response.profileData);
         commit("SET_VISIBLE", false);
         console.log(response);
         return response;
@@ -199,6 +193,7 @@ const users = {
         commit("SET_VISIBLE", false);
         // if (response.token) {
         commit("SET_TOKEN", response.token);
+        commit("SET_EMAIL", userData.email);
         const expiryDate = new Date();
         expiryDate.setTime(expiryDate.getTime() + 24 * 60 * 60 * 1000); // 24 hours
         document.cookie = `token=${response.token}; expires=${expiryDate.toUTCString()}; path=/`;

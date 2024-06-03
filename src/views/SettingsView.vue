@@ -71,7 +71,6 @@ export default {
       this.$router.push("/login");
       this.showToast("error", result.message);
     } else if (result.status >= 200 && result.status < 300) {
-      this.$store.commit("SET_USER_DATA", result.profileData);
       this.bio = this.$store.getters.GET_BIO;
       console.log(this.bio);
       console.log(this.$store.getters.GET_TOKEN);

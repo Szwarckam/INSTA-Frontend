@@ -15,7 +15,7 @@ export default {
       return this.$store.getters.GET_VISIBLE;
     },
   },
-  created() {
+  async created() {
     const cookies = document.cookie.split(";");
     let token = null;
     cookies.forEach((cookie) => {
@@ -27,6 +27,8 @@ export default {
 
     if (token) {
       this.$store.commit("SET_TOKEN", token);
+      const result = await this.$store.dispatch("POST_PROFILE_INFO", this.$store.getters.GET_TOKEN);
+      console.log(result);
     }
   },
   methods: {

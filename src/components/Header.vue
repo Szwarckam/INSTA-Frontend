@@ -73,8 +73,8 @@ export default {
           items: [
             {
               label: "My album",
-              icon: "pi pi-home",
-              route: "/profile",
+              icon: "pi pi-address-book",
+              route: "/myprofile",
             },
             {
               label: "Settings",

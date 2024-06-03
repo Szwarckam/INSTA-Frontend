@@ -14,6 +14,7 @@ const Login = () => import("@/views/LoginView.vue");
 const Register = () => import("@/views/RegisterView.vue");
 const Settings = () => import("@/views/SettingsView.vue");
 const Auth = () => import("@/views/AuthView.vue");
+const MyProfile = () => import("@/views/MyProfileView.vue");
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -36,6 +37,11 @@ const router = createRouter({
       path: "/settings",
       name: "settings",
       component: Settings,
+    },
+    {
+      path: "/myprofile",
+      name: "myprofile",
+      component: MyProfile,
     },
     {
       path: "/login",

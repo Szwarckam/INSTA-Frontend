@@ -1,7 +1,8 @@
 <template>
   <div class="info-container">
     <!-- <Editor v-model="bio" editorStyle="height: 320px" :class="{ error: isBioValid }" /> -->
-    <Editor v-model="bio" editorStyle="height: 320px; width:60vw">
+    <!-- <Editor v-model="bio" editorStyle="height: 320px; width:60vw">
+
       <template v-slot:toolbar>
         <span class="ql-formats">
           <button v-tooltip.bottom="'Bold'" class="ql-bold"></button>
@@ -9,9 +10,13 @@
           <button v-tooltip.bottom="'Underline'" class="ql-underline"></button>
         </span>
       </template>
-    </Editor>
+    </Editor> -->
+    <FloatLabel>
+      <Textarea v-model="bio" rows="5" cols="100" style="resize: none" :invalid="!isBioValid && bioTouched" />
+      <label>Username</label>
+    </FloatLabel>
 
-    <span v-if="!isBioValid && bioTouched" class="error">Bio must contain at least 2 letters and only letters</span>
+    <span v-if="!isBioValid && bioTouched" class="error">Bio must contain at least 2 signs</span>
     <div class="bottom">
       <Button class="mt-4 btn" label="Save" @click="changeUserBio" />
     </div>
@@ -83,7 +88,6 @@ export default {
           this.showToast("error", result.message);
         } else if (result.status >= 200 && result.status < 300) {
           this.showToast("success", result.message);
-          this.$store.commit("SET_USER_DATA", result.profileData);
           this.$router.push("/settings");
         }
       } else {
