@@ -66,7 +66,7 @@ export default {
     console.log("Created");
     console.log("GET data successful!");
     console.log("[DEBBUGER] ", this.$store.getters.GET_EMAIL);
-    const result = await this.$store.dispatch("POST_PROFILE_INFO", this.$store.getters.GET_EMAIL);
+    const result = await this.$store.dispatch("POST_MY_PROFILE_INFO");
     console.log(result);
     if (result.status >= 400 && result.status < 500) {
       this.$router.push("/login");

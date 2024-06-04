@@ -1,6 +1,6 @@
 <template>
   <div class="info-container">
-    <!-- <Editor v-model="bio" editorStyle="height: 320px" :class="{ error: isBioValid }" /> -->
+    <Editor v-model="bio" editorStyle="height: 320px" :class="{ error: isBioValid }" />
     <!-- <Editor v-model="bio" editorStyle="height: 320px; width:60vw">
 
       <template v-slot:toolbar>
@@ -13,7 +13,7 @@
     </Editor> -->
     <FloatLabel>
       <Textarea
-        v-model="getBio"
+        v-model="bio"
         cols="100"
         rows="10"
         style="resize: vertical; height: fit-content"
@@ -71,12 +71,12 @@ export default {
   },
   computed: {
     getBio() {
-      this.bio = this.$store.getters.GET_BIO;
       console.log(this.bio);
+      this.bio = this.$store.getters.GET_BIO;
       return this.bio;
     },
   },
-  created() {
+  mounted() {
     console.log("EDyto zamonotway");
   },
   methods: {
@@ -101,13 +101,14 @@ export default {
           this.showToast("success", result.message);
           this.$router.push("/settings");
         }
-      } else {
-        this.showToast("error", "Bio must contain at least 2 letters and only letters");
+        // } else {
+        // this.showToast("error", "Bio must contain at least 2 letters and only letters");
       }
     },
     validatBio() {
       this.bioTouched = true;
       this.isBioValid = this.bio.length > 0 ? true : false;
+      console.log(this.isBioValid);
     },
   },
 };

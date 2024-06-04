@@ -3,6 +3,7 @@ import {
   loginUser,
   logoutUser,
   profileInfo,
+  myProfileInfo,
   changePassword,
   changeUserData,
   // upladProfilePhoto,
@@ -100,16 +101,17 @@ const users = {
         }
       }
     },
-    async POST_PROFILE_INFO({ commit }, userData) {
+    async POST_MY_PROFILE_INFO({ commit }) {
       console.log("POST");
       console.log("Ustawienie visible:");
       commit("SET_VISIBLE", true);
       // commit("SHOW_ERROR", true);
       // showError();
       try {
-        const response = await profileInfo(userData);
+        const response = await myProfileInfo();
         console.log("response.data", response);
         commit("SET_USER_DATA", response.profileData);
+        commit("SET_BIO", response.profileData.bio);
         // console.log(this.$store.getters.GET_EMAIL);
         commit("SET_VISIBLE", false);
 

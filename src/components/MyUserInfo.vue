@@ -97,11 +97,12 @@ export default {
       bio: "",
     };
   },
+  methods: {},
   components: {
     SpeedDial,
   },
   async created() {
-    const result = await this.$store.dispatch("POST_PROFILE_INFO", this.$store.getters.GET_EMAIL);
+    const result = await this.$store.dispatch("POST_MY_PROFILE_INFO");
     console.log(result);
     if (result) {
       this.name = this.$store.getters.GET_USER_DATA.name;
@@ -110,6 +111,7 @@ export default {
       this.email = this.$store.getters.GET_USER_DATA.email;
     }
     console.log(this.name);
+    console.log(this.$store.getters.GET_EMAIL);
   },
   computed: {
     getData() {

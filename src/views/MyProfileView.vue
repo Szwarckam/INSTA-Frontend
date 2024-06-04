@@ -1,7 +1,7 @@
 <template>
   <div class="photos-container">
     <MyUserInfo />
-    <Galleria />
+    <!-- <Galleria /> -->
     <MyAlbum />
   </div>
 </template>
@@ -9,12 +9,12 @@
 <script>
 import MyAlbum from "@/components/MyAlbum.vue";
 import MyUserInfo from "@/components/MyUserInfo.vue";
-import Galleria from "@/components/Galleria.vue";
+// import Galleria from "@/components/Galleria.vue";
 export default {
   components: {
     MyAlbum,
     MyUserInfo,
-    Galleria,
+    // Galleria,
   },
   data() {
     return {
@@ -29,6 +29,8 @@ export default {
   computed: {},
   async created() {
     console.log("Created");
+    const result2 = await this.$store.dispatch("POST_MY_PROFILE_INFO");
+    console.log(result2);
     const result = await this.$store.dispatch("GET_PHOTOS_LIST");
     console.log(result);
   },

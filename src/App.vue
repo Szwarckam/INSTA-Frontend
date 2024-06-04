@@ -27,9 +27,12 @@ export default {
 
     if (token) {
       this.$store.commit("SET_TOKEN", token);
-      const result = await this.$store.dispatch("POST_PROFILE_INFO", this.$store.getters.GET_EMAIL);
+      const result = await this.$store.dispatch("POST_MY_PROFILE_INFO");
       console.log(result);
     }
+
+    const result = await this.$store.dispatch("POST_MY_PROFILE_INFO");
+    console.log(result);
   },
   methods: {
     show_Error() {
