@@ -75,9 +75,11 @@ const leaveLike = (object) => post("http://localhost:3000/api/photos/like", obje
 const profileInfo = (email) => get(`http://localhost:3000/api/profile/${email}`);
 const myProfileInfo = () => get(`http://localhost:3000/api/profile`);
 const photosList = () => get("http://localhost:3000/api/photos");
+const tagsList = () => get("http://localhost:3000/api/tags/raw");
 
 export {
   registerUser,
+  tagsList,
   loginUser,
   logoutUser,
   profileInfo,

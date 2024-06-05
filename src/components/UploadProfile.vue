@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <Toast />
+    <!-- <Toast /> -->
     <div class="card flex justify-content-center">
       <FileUpload
         mode="basic"

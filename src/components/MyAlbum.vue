@@ -1,6 +1,12 @@
 <template>
   <div class="card-container">
-    <Card v-for="photo in photosList" :key="photo.id" class="card">
+    <TagsSelect class="tags-select2" />
+    <Card
+      v-for="photo in photosList"
+      :key="photo.id"
+      class="card"
+      :style="{ display: isVisible(photo) ? 'block' : 'none' }"
+    >
       <template #header>
         <!-- <img alt="user header" :src="`http://localhost:3000/api/getimage/${photo.id}`" /> -->
       </template>
@@ -25,7 +31,8 @@
     <div v-if="likeList.length > 0">
       People who like this photo:
       <div v-for="like in likeList">
-        {{ like }}
+        <div v-if="like == this.$store.getters.GET_EMAIL"><span class="pi pi-user mr-2"></span>You</div>
+        <div v-else><span class="pi pi-user mr-2"></span>{{ like }}</div>
       </div>
     </div>
     <div v-else>Nobody likes ur photo :(</div>
@@ -53,10 +60,19 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
+  position: relative;
+}
+
+.tags-select2 {
+  position: absolute;
+  right: 135px;
+  top: 0vh;
 }
 </style>
 
 <script>
+import TagsSelect from "@/components/TagsSelect.vue";
+
 export default {
   data() {
     return {
@@ -65,13 +81,30 @@ export default {
       likeList: null,
     };
   },
+  components: {
+    TagsSelect,
+  },
   computed: {
     photosList() {
       console.log(this.$store.getters.GET_PHOTOS.filter((el) => el.album == this.$store.getters.GET_EMAIL));
       return this.$store.getters.GET_PHOTOS.filter((el) => el.album == this.$store.getters.GET_EMAIL);
     },
+    tags() {
+      return this.$store.getters.GET_FIND_PHOTOS_BY;
+    },
+  },
+  mounted() {
+    this.$store.commit("SET_FIND_PHOTOS_BY", []);
   },
   methods: {
+    isVisible(photo) {
+      console.log(photo);
+      if (this.tags.length > 0) {
+        return photo.tags.some((tag) => this.tags.includes(tag.name));
+      } else {
+        return true;
+      }
+    },
     showToast(type, message) {
       this.$toast.add({ severity: type, summary: "", detail: message, life: 3000 });
     },

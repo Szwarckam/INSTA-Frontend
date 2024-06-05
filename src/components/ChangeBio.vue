@@ -1,6 +1,6 @@
 <template>
   <div class="info-container">
-    <Editor v-model="bio" editorStyle="height: 320px" :class="{ error: isBioValid }" />
+    <!-- <Editor v-model="bio" editorStyle="height: 320px" :class="{ error: isBioValid }" /> -->
     <!-- <Editor v-model="bio" editorStyle="height: 320px; width:60vw">
 
       <template v-slot:toolbar>
@@ -69,15 +69,14 @@ export default {
       bioTouched: false,
     };
   },
-  computed: {
-    getBio() {
-      console.log(this.bio);
-      this.bio = this.$store.getters.GET_BIO;
-      return this.bio;
-    },
-  },
-  mounted() {
+
+  async mounted() {
     console.log("EDyto zamonotway");
+    const result = await this.$store.dispatch("POST_MY_PROFILE_INFO");
+    console.log(result);
+    if (result) {
+      this.bio = this.$store.getters.GET_BIO;
+    }
   },
   methods: {
     showToast(type, message) {
@@ -95,7 +94,7 @@ export default {
           bio: this.bio.replace(/<[^>]+>/g, ""),
         });
         console.log(result);
-        if (result.status == 404) {
+        if (result.status >= 400 && result.status < 500) {
           this.showToast("error", result.message);
         } else if (result.status >= 200 && result.status < 300) {
           this.showToast("success", result.message);

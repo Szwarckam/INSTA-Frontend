@@ -38,6 +38,7 @@ import Password from "primevue/password";
 import InlineMessage from "primevue/inlinemessage";
 import ToastService from "primevue/toastservice";
 import Textarea from "primevue/textarea";
+import MultiSelect from "primevue/multiselect";
 
 import Galleria from "primevue/galleria";
 // import Toast from "primevue/toast";
@@ -56,6 +57,7 @@ app.component("Menubar", Menubar);
 app.component("Avatar", Avatar);
 app.component("InputText", InputText);
 app.component("TabMenu", TabMenu);
+app.component("MultiSelect", MultiSelect);
 app.component("Dropdown", Dropdown);
 app.component("Textarea", Textarea);
 app.component("Card", Card);

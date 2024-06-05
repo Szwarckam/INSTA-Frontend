@@ -1,12 +1,17 @@
 <template>
   <div class="card-container">
-    <Card v-for="photo in photosList" :key="photo.id" class="card">
+    <Card
+      v-for="photo in photosList"
+      :key="photo.id"
+      class="card"
+      :style="{ display: isVisible(photo) ? 'block' : 'none' }"
+    >
       <template #header>
         <!-- <img alt="user header" :src="`http://localhost:3000/api/getimage/${photo.id}`" /> -->
       </template>
       <template #title>
-        <div class="title">Title: {{ photo.originalName }}</div></template
-      >
+        <div class="title">Title: {{ photo.originalName }}</div>
+      </template>
       <template #subtitle>
         <div class="author">Author: {{ photo.authorName }} {{ photo.authorLastName }}</div>
       </template>
@@ -53,6 +58,7 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
+  padding-top: 80px;
 }
 </style>
 
@@ -69,32 +75,33 @@ export default {
     },
 
     photosList() {
-      console.log(this.$store.getters.GET_PHOTOS);
-      for (const photo of this.$store.getters.GET_PHOTOS) {
-        console.log(photo.likes.find((el) => el == this.$store.getters.GET_EMAIL));
-        if (photo.likes.find((el) => el == this.$store.getters.GET_EMAIL)) {
+      const photos = this.$store.getters.GET_PHOTOS;
+      for (const photo of photos) {
+        if (photo.likes.find((el) => el === this.$store.getters.GET_EMAIL)) {
           this.likeButtons[photo.id] = true;
         }
       }
-      return this.$store.getters.GET_PHOTOS;
+      return photos;
+    },
+
+    tags() {
+      return this.$store.getters.GET_FIND_PHOTOS_BY;
     },
   },
   methods: {
-    // prevLiked(photos, id) {
-    //   console.log(this.$store.getters.GET_EMAIL);
-    //   console.log(photos.find((el) => el == this.$store.getters.GET_EMAIL));
-    //   const photo = photos.find((el) => el == this.$store.getters.GET_EMAIL);
-    //   if (photo) {
-    //     this.likeButtons[id] = true;
-    //   }
-    // },
+    isVisible(photo) {
+      console.log(photo);
+      if (this.tags.length > 0) {
+        return photo.tags.some((tag) => this.tags.includes(tag.name));
+      } else {
+        return true;
+      }
+    },
     async LikeOrNot(id) {
       // Zmienia stan przycisku
-      console.log(this.$store.getters.GET_EMAIL);
       if (this.$store.getters.GET_TOKEN != "") {
         this.likeButtons[id] = !this.likeButtons[id];
 
-        console.log(this.likeButtons);
         const result = await this.$store.dispatch("POST_LEAVE_LIKE", {
           id: id,
         });
@@ -107,12 +114,13 @@ export default {
         this.showToast("info", "You must be logged in to leave a like");
         this.$router.push("/login");
       }
-
-      console.log(id);
     },
     showToast(type, message) {
       this.$toast.add({ severity: type, summary: "", detail: message, life: 3000 });
     },
+  },
+  mounted() {
+    this.$store.commit("SET_FIND_PHOTOS_BY", []);
   },
 };
 </script>

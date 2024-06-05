@@ -1,4 +1,4 @@
-import { photosList, leaveLike } from "@/api";
+import { photosList, leaveLike, tagsList } from "@/api";
 
 const overall = {
   //state
@@ -7,6 +7,8 @@ const overall = {
       visible: false,
       photos: [],
       photoToEdit: null,
+      tags: [],
+      findPhotosBy: [],
     };
   },
 
@@ -21,6 +23,18 @@ const overall = {
     SET_PHOTO_TO_EDIT(state, photoToEdit) {
       state.photoToEdit = photoToEdit;
     },
+    SET_TAGS(state, tags) {
+      state.tags = [];
+      for (const tag of tags) {
+        state.tags.push({ name: tag, code: tag });
+      }
+    },
+    SET_FIND_PHOTOS_BY(state, tags) {
+      state.findPhotosBy = [];
+      for (const tag of tags) {
+        state.findPhotosBy.push(tag.name);
+      }
+    },
   },
 
   //getters
@@ -33,6 +47,12 @@ const overall = {
     },
     GET_PHOTO_TO_EDIT(state) {
       return state.photoToEdit;
+    },
+    GET_TAGS(state) {
+      return state.tags;
+    },
+    GET_FIND_PHOTOS_BY(state) {
+      return state.findPhotosBy;
     },
   },
 
@@ -47,6 +67,25 @@ const overall = {
         commit("SET_VISIBLE", false);
 
         commit("SET_PHOTOS", response.files);
+        return response;
+      } catch (err) {
+        if (err.response) {
+          console.error("Błąd serwera:", err.response.data);
+          commit("SET_VISIBLE", false);
+          return err.response.data;
+        }
+      }
+      return false;
+    },
+    async GET_TAGS_LIST({ commit }) {
+      console.log("Pobieranie tagów");
+      commit("SET_VISIBLE", true);
+      try {
+        const response = await tagsList();
+        console.log("response.data", response);
+        commit("SET_VISIBLE", false);
+
+        commit("SET_TAGS", response.tags);
         return response;
       } catch (err) {
         if (err.response) {

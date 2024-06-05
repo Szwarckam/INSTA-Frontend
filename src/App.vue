@@ -50,11 +50,25 @@ export default {
 <template>
   <Toast class="mt-2" />
   <Header />
-  <RouterView />
+  <transition name="fade" mode="out-in">
+    <RouterView />
+  </transition>
   <Spinner :visible="isVisible" />
 </template>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
 html {
   font-size: 14px;
 }

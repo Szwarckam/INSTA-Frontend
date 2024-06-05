@@ -28,9 +28,21 @@ export default {
   },
   computed: {},
   async created() {
+    console.log(this.$store.getters.GET_TOKEN);
+    if (this.$store.getters.GET_TOKEN == "") {
+      this.showToast("info", "You must be logged in");
+      this.$router.push("/login");
+      return;
+    }
     console.log("Created");
     const result2 = await this.$store.dispatch("POST_MY_PROFILE_INFO");
     console.log(result2);
+    if (result2.status == "403") {
+      this.showToast("info", "You must be logged in");
+      this.$router.push("/login");
+      console.log("Wyloguj");
+    }
+
     const result = await this.$store.dispatch("GET_PHOTOS_LIST");
     console.log(result);
   },
@@ -40,5 +52,6 @@ export default {
 .photos-container {
   width: calc(100vw - 40px);
   margin: 20px;
+  /* margin-top: 80px; */
 }
 </style>
