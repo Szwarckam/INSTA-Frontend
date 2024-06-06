@@ -48,12 +48,14 @@ export default {
 </script>
 
 <template>
-  <Toast class="mt-2" />
+  <Toast class="toast" />
+  <ProgressBar v-show="isVisible" mode="indeterminate" style="height: 4px"></ProgressBar>
   <Header />
+
   <transition name="fade" mode="out-in">
     <RouterView />
   </transition>
-  <Spinner :visible="isVisible" />
+  <!-- <Spinner :visible="isVisible" /> -->
 </template>
 
 <style scoped>

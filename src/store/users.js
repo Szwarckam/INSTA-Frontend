@@ -197,7 +197,7 @@ const users = {
         commit("SET_TOKEN", response.token);
         commit("SET_EMAIL", userData.email);
         const expiryDate = new Date();
-        expiryDate.setTime(expiryDate.getTime() + 24 * 60 * 60 * 1000); // 24 hours
+        expiryDate.setTime(expiryDate.getTime() + 24 * 60 * 60 * 1000); // 24h
         document.cookie = `token=${response.token}; expires=${expiryDate.toUTCString()}; path=/`;
         // }
         // console.log(response.data);
