@@ -15,6 +15,7 @@ const Register = () => import("@/views/RegisterView.vue");
 const Settings = () => import("@/views/SettingsView.vue");
 const Auth = () => import("@/views/AuthView.vue");
 const MyProfile = () => import("@/views/MyProfileView.vue");
+const Detail = () => import("@/views/DetailView.vue");
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -52,6 +53,12 @@ const router = createRouter({
       path: "/register",
       name: "register",
       component: Register,
+    },
+    {
+      path: "/detail/:id",
+      name: "detail",
+      component: Detail,
+      props: true,
     },
     {
       path: "/auth",

@@ -18,6 +18,9 @@
         <div class="image-container">
           <Image :src="`http://localhost:3000/api/getimage/${photo.id}`" width="300" height="300" alt="Image" preview />
         </div>
+        <ScrollPanel style="width: 300px; height: 60px; text-align: justify">
+          <p>{{ getDesc(photo.desc) }}</p>
+        </ScrollPanel>
       </template>
       <template #footer>
         <div class="flex gap-3 mt-1">
@@ -97,6 +100,12 @@ export default {
     this.$store.commit("SET_FIND_PHOTOS_BY", []);
   },
   methods: {
+    getDesc(desc) {
+      if (desc.length > 200) {
+        return desc.substring(0, 200) + "...";
+      }
+      return desc;
+    },
     isVisible(photo) {
       console.log(photo);
       if (this.tags.length > 0) {

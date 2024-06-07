@@ -1,11 +1,13 @@
 <template>
-  <div class="editor-container">
-    <div class="img-container">
-      <ImageComp />
-    </div>
-    <div class="card-container">
-      <EditorOptions />
-    </div>
+  <div class="editor-main">
+    <EditorOptions />
+    <Card class="editor-card">
+      <div class="editor-container">
+        <div class="img-container">
+          <ImageComp />
+        </div>
+      </div>
+    </Card>
   </div>
 </template>
 
@@ -13,6 +15,7 @@
 // import Croper from "@/components/Croper.vue";
 import ImageComp from "@/components/ImageComp.vue";
 import EditorOptions from "@/components/EditorOptions.vue";
+import Card from "primevue/card";
 export default {
   data() {
     return {
@@ -41,10 +44,17 @@ export default {
   height: 80vh;
 }
 
-.card {
+.editor-card {
   display: block;
+  width: 80vw;
 }
-
+.editor-main {
+  width: 100vw;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 20px;
+}
 .editor-container {
   padding-top: 20px;
   display: flex;

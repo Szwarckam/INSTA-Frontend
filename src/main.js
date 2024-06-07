@@ -39,7 +39,7 @@ import InlineMessage from "primevue/inlinemessage";
 import ToastService from "primevue/toastservice";
 import Textarea from "primevue/textarea";
 import MultiSelect from "primevue/multiselect";
-
+import ScrollPanel from "primevue/scrollpanel";
 import Galleria from "primevue/galleria";
 // import Toast from "primevue/toast";
 const app = createApp(App);
@@ -54,6 +54,7 @@ app.use(validate);
 app.use(router);
 app.use(store);
 app.component("Menubar", Menubar);
+app.component("ScrollPanel", ScrollPanel);
 app.component("Avatar", Avatar);
 app.component("InputText", InputText);
 app.component("TabMenu", TabMenu);

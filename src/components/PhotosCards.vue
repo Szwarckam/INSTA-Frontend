@@ -19,7 +19,11 @@
         <div class="image-container">
           <Image :src="`http://localhost:3000/api/getimage/${photo.id}`" width="300" height="300" alt="Image" preview />
         </div>
+        <ScrollPanel style="width: 300px; height: 60px; text-align: justify">
+          <p>{{ getDesc(photo.desc) }}</p>
+        </ScrollPanel>
       </template>
+
       <template #footer>
         <div class="flex gap-3 mt-1">
           <Button
@@ -33,34 +37,12 @@
             :label="photo.likes.length"
           />
 
-          <Button severity="secondary" label="See more" class="w-full" />
+          <Button severity="secondary" label="See more" class="w-full" @click="goToDetail(photo.id)" />
         </div>
       </template>
     </Card>
   </div>
 </template>
-
-<style>
-.title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.author {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.card-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding-top: 80px;
-}
-</style>
 
 <script>
 export default {
@@ -89,6 +71,15 @@ export default {
     },
   },
   methods: {
+    goToDetail(id) {
+      this.$router.push({ name: "detail", params: { id } });
+    },
+    getDesc(desc) {
+      if (desc.length > 200) {
+        return desc.substring(0, 200) + "...";
+      }
+      return desc;
+    },
     isVisible(photo) {
       console.log(photo);
       if (this.tags.length > 0) {
@@ -124,3 +115,34 @@ export default {
   },
 };
 </script>
+
+<style>
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-top: 80px;
+}
+
+.desc-container {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 300px;
+}
+</style>

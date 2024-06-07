@@ -49,7 +49,11 @@ export default {
 
 <template>
   <Toast class="toast" />
-  <ProgressBar v-show="isVisible" mode="indeterminate" style="height: 4px"></ProgressBar>
+  <ProgressBar
+    v-show="isVisible"
+    mode="indeterminate"
+    style="height: 4px; width: 100vw; position: absolute"
+  ></ProgressBar>
   <Header />
 
   <transition name="fade" mode="out-in">
