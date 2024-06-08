@@ -2,9 +2,9 @@
 defineProps({
   msg: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 </script>
 
 <template>
@@ -18,7 +18,7 @@ defineProps({
   </div>
 </template>
 
-<style scoped>
+<style>
 h1 {
   font-weight: 500;
   font-size: 2.6rem;

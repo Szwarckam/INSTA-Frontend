@@ -76,8 +76,9 @@ const profileInfo = (email) => get(`http://localhost:3000/api/profile/${email}`)
 const myProfileInfo = () => get(`http://localhost:3000/api/profile`);
 const photosList = () => get("http://localhost:3000/api/photos");
 const tagsList = () => get("http://localhost:3000/api/tags/raw");
-
+const sendFilters = (data) => patch("http://localhost:3000/api/filters", data);
 export {
+  sendFilters,
   registerUser,
   tagsList,
   loginUser,

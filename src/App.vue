@@ -52,20 +52,20 @@ export default {
   <ProgressBar
     v-show="isVisible"
     mode="indeterminate"
-    style="height: 4px; width: 100vw; position: absolute"
+    style="height: 4px; width: 99vw; position: absolute"
   ></ProgressBar>
   <Header />
 
-  <transition name="fade" mode="out-in">
-    <RouterView />
-  </transition>
+  <!-- <transition name="fade" mode="out-in"> -->
+  <RouterView />
+  <!-- </transition> -->
   <!-- <Spinner :visible="isVisible" /> -->
 </template>
 
-<style scoped>
+<style>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 1s;
+  transition: opacity 0.5s;
 }
 .fade-enter-from,
 .fade-leave-to {
@@ -79,23 +79,23 @@ html {
   font-size: 14px;
 }
 
-body {
-  font-family: var(--font-family);
-  font-weight: normal;
-  background: var(--surface-ground);
-  color: var(--text-color);
-  padding: 1rem;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 .card {
   background: var(--surface-card);
   padding: 2rem;
   border-radius: 10px;
   margin-bottom: 1rem;
 }
-
+.goBackBtn2 {
+  margin-left: 100px;
+  margin-top: 140px;
+  display: block;
+  width: 120px;
+  height: 60px;
+  position: absolute;
+  left: 140px;
+  top: 40px;
+  z-index: 20;
+}
 p {
   line-height: 1.75;
 }

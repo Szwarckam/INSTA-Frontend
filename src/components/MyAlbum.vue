@@ -1,5 +1,6 @@
 <template>
   <div class="card-container">
+    <!-- <Button /> -->
     <TagsSelect class="tags-select2" />
     <Card
       v-for="photo in photosList"
@@ -18,9 +19,9 @@
         <div class="image-container">
           <Image :src="`http://localhost:3000/api/getimage/${photo.id}`" width="300" height="300" alt="Image" preview />
         </div>
-        <ScrollPanel style="width: 300px; height: 60px; text-align: justify">
-          <p>{{ getDesc(photo.desc) }}</p>
-        </ScrollPanel>
+        <!-- <ScrollPanel style="width: 300px; height: 60px; text-align: justify"> -->
+        <!-- <p>{{ getDesc(photo.desc) }}</p> -->
+        <!-- </ScrollPanel> -->
       </template>
       <template #footer>
         <div class="flex gap-3 mt-1">
@@ -70,6 +71,7 @@
   position: absolute;
   right: 135px;
   top: 0vh;
+  z-index: 10;
 }
 </style>
 
@@ -101,8 +103,8 @@ export default {
   },
   methods: {
     getDesc(desc) {
-      if (desc.length > 200) {
-        return desc.substring(0, 200) + "...";
+      if (desc.length > 100) {
+        return desc.substring(0, 100) + "...";
       }
       return desc;
     },

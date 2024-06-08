@@ -1,4 +1,4 @@
-import { photosList, leaveLike, tagsList } from "@/api";
+import { photosList, leaveLike, tagsList, sendFilters } from "@/api";
 
 const overall = {
   //state
@@ -58,6 +58,26 @@ const overall = {
 
   // tu zapytania do serwera z pomocą naszego api
   actions: {
+    async PATCH_FILTERS({ commit }, data) {
+      console.log("dODAWANIE FILTRÓW");
+      commit("SET_VISIBLE", true);
+      console.log(data);
+      try {
+        const response = await sendFilters(data);
+        console.log("response.data", response);
+        commit("SET_VISIBLE", false);
+        console.log(response);
+
+        return response;
+      } catch (err) {
+        if (err.response) {
+          console.error("Błąd serwera:", err.response.data);
+          commit("SET_VISIBLE", false);
+          return err.response.data;
+        }
+      }
+      return false;
+    },
     async GET_PHOTOS_LIST({ commit }) {
       console.log("Pobieranie zdjęć");
       commit("SET_VISIBLE", true);
@@ -66,7 +86,7 @@ const overall = {
         console.log("response.data", response);
         commit("SET_VISIBLE", false);
 
-        commit("SET_PHOTOS", response.files);
+        commit("SET_PHOTOS", response.files.reverse());
         return response;
       } catch (err) {
         if (err.response) {
@@ -105,7 +125,7 @@ const overall = {
         console.log("response.data", response);
         commit("SET_VISIBLE", false);
         console.log(response.files);
-        commit("SET_PHOTOS", response.files);
+        commit("SET_PHOTOS", response.files.reverse());
         return response;
       } catch (err) {
         if (err.response) {

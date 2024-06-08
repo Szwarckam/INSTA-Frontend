@@ -22,15 +22,60 @@ export default {
   data() {
     return {
       items: [
-        { label: "Router Link", icon: "pi pi-home", route: "/tabmenu" },
         {
-          label: "Programmatic",
-          icon: "pi pi-palette",
+          label: "Default",
           command: () => {
-            this.$router.push("/unstyled");
+            this.$router.push("/editor");
           },
         },
-        { label: "External", icon: "pi pi-link", url: "https://vuejs.org/" },
+        {
+          label: "Rotate",
+          command: () => {
+            this.$router.push("/rotate");
+          },
+        },
+        {
+          label: "Resize",
+          command: () => {
+            this.$router.push("/resize");
+          },
+        },
+        {
+          label: "Reformat",
+          command: () => {
+            this.$router.push("/reformat");
+          },
+        },
+        {
+          label: "Crop",
+          command: () => {
+            this.$router.push("/crop");
+          },
+        },
+        {
+          label: "Grayscale",
+          command: () => {
+            this.$router.push("/grayscale");
+          },
+        },
+        {
+          label: "Flip",
+          command: () => {
+            this.$router.push("/flip");
+          },
+        },
+        {
+          label: "Negate",
+          command: () => {
+            this.$router.push("/negate");
+          },
+        },
+        {
+          label: "Tint",
+          command: () => {
+            this.$router.push("/tint");
+          },
+        },
       ],
     };
   },

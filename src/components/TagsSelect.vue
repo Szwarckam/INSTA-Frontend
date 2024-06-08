@@ -8,6 +8,7 @@
       placeholder="Select Tags"
       display="chip"
       class="w-full md:w-20rem"
+      style="z-index: 10"
     >
       <template #option="slotProps">
         <div class="flex align-items-center">
@@ -36,7 +37,7 @@
 export default {
   data() {
     return {
-      selectedTags: null,
+      selectedTags: [],
       tags: [],
     };
   },

@@ -41,18 +41,36 @@ import Textarea from "primevue/textarea";
 import MultiSelect from "primevue/multiselect";
 import ScrollPanel from "primevue/scrollpanel";
 import Galleria from "primevue/galleria";
+import Chips from "primevue/chips";
+import TreeSelect from "primevue/treeselect";
 // import Toast from "primevue/toast";
-const app = createApp(App);
+
+import Chip from "primevue/chip";
 import { validate } from "vee-validate";
 import ProgressSpinner from "primevue/progressspinner";
 import Dialog from "primevue/dialog";
+import Slider from "primevue/slider";
+import InputNumber from "primevue/inputnumber";
+import SelectButton from "primevue/selectbutton";
 import Tooltip from "primevue/tooltip";
-
+import InputSwitch from "primevue/inputswitch";
+import Checkbox from "primevue/checkbox";
+import Knob from "primevue/knob";
+const app = createApp(App);
 // import VeeValidate from "vee-validate";
 
 app.use(validate);
 app.use(router);
 app.use(store);
+app.component("Knob", Knob);
+app.component("InputSwitch", InputSwitch);
+app.component("Checkbox", Checkbox);
+app.component("TreeSelect", TreeSelect);
+app.component("InputNumber", InputNumber);
+app.component("SelectButton", SelectButton);
+app.component("Slider", Slider);
+app.component("Chip", Chip);
+app.component("Chips", Chips);
 app.component("Menubar", Menubar);
 app.component("ScrollPanel", ScrollPanel);
 app.component("Avatar", Avatar);

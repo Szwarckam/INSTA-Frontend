@@ -71,6 +71,7 @@ export default {
     showToast(type, message) {
       this.$toast.add({ severity: type, summary: "", detail: message, life: 3000 });
     },
+
     async changeUserData() {
       this.validatLastName();
       this.validatName();

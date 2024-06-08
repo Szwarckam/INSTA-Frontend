@@ -1,14 +1,15 @@
 <template>
   <div class="photos-container">
     <TagsSelect class="tags-select" />
-    <Button
+    <!-- <Button
       :style="{ display: $store.getters.GET_TOKEN !== '' ? 'inline-block' : 'none' }"
       severity="help"
       icon="pi pi-plus-circle"
-      @click="this.$router.push('/addPhoto')"
+      @click="this.$router.push('/add')"
       class="btn-edit2"
+      style="z-index: 10"
       v-tooltip.left="'Add photo'"
-    />
+    /> -->
     <PhotosCards />
   </div>
 </template>
@@ -41,13 +42,13 @@ export default {
 </script>
 <style>
 .photos-container {
-  width: calc(100vw - 40px);
+  width: calc(99vw - 40px);
   margin: 20px;
 }
 
 .tags-select {
   position: absolute;
-  right: 100px;
+  right: 80px;
 }
 .btn-edit2 {
   position: absolute;

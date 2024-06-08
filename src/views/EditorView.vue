@@ -1,11 +1,12 @@
 <template>
+  <EditorOptions />
   <div class="editor-main">
-    <EditorOptions />
     <Card class="editor-card">
+      <template #content>
+        <ImageComp />
+      </template>
       <div class="editor-container">
-        <div class="img-container">
-          <ImageComp />
-        </div>
+        <div class="img-container"></div>
       </div>
     </Card>
   </div>

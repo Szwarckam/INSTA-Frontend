@@ -19,9 +19,10 @@
         <div class="image-container">
           <Image :src="`http://localhost:3000/api/getimage/${photo.id}`" width="300" height="300" alt="Image" preview />
         </div>
-        <ScrollPanel style="width: 300px; height: 60px; text-align: justify">
+        <!-- <ScrollPanel style="width: 300px; height: 60px; text-align: justify">
           <p>{{ getDesc(photo.desc) }}</p>
-        </ScrollPanel>
+        </ScrollPanel> -->
+        <p>{{ timeSince(photo.history[0].timestamp) }}</p>
       </template>
 
       <template #footer>
@@ -34,7 +35,7 @@
             :outlined="!likeButtons[photo.id]"
             :raised="likeButtons[photo.id]"
             class="w-full"
-            :label="photo.likes.length"
+            :label="getLikesNum(photo.id)"
           />
 
           <Button severity="secondary" label="See more" class="w-full" @click="goToDetail(photo.id)" />
@@ -71,12 +72,44 @@ export default {
     },
   },
   methods: {
+    getLikesNum(id) {
+      const photo = this.$store.getters.GET_PHOTOS.find((el) => el.id == id);
+      return photo.likes.length > 0 ? photo.likes.length : null;
+    },
+    timeSince(time) {
+      console.log(time);
+      const now = new Date();
+      const date = new Date(time);
+      const seconds = Math.floor((now - date) / 1000);
+
+      let interval = Math.floor(seconds / 31536000);
+      if (interval > 1) {
+        return `${interval} years ago`;
+      }
+      interval = Math.floor(seconds / 2592000);
+      if (interval > 1) {
+        return `${interval} months ago`;
+      }
+      interval = Math.floor(seconds / 86400);
+      if (interval > 1) {
+        return `${interval} days ago`;
+      }
+      interval = Math.floor(seconds / 3600);
+      if (interval > 1) {
+        return `${interval} hours ago`;
+      }
+      interval = Math.floor(seconds / 60);
+      if (interval > 1) {
+        return `${interval} minutes ago`;
+      }
+      return `${Math.floor(seconds)} seconds ago`;
+    },
     goToDetail(id) {
       this.$router.push({ name: "detail", params: { id } });
     },
     getDesc(desc) {
-      if (desc.length > 200) {
-        return desc.substring(0, 200) + "...";
+      if (desc.length > 100) {
+        return desc.substring(0, 100) + "...";
       }
       return desc;
     },

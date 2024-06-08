@@ -3,7 +3,13 @@
     <Menubar :model="menuItems">
       <template #item="{ item, props, hasSubmenu }">
         <router-link
-          v-if="item.route && item.label != 'Login' && item.label != 'Logout' && item.label != 'My profile'"
+          v-if="
+            item.route &&
+            item.label != 'Login' &&
+            item.label != 'Add photo' &&
+            item.label != 'Logout' &&
+            item.label != 'My profile'
+          "
           v-slot="{ href, navigate }"
           :to="item.route"
           custom
@@ -13,7 +19,12 @@
             <span class="ml-2">{{ item.label }}</span>
           </a>
         </router-link>
-        <a v-else-if="item.label === 'My profile' && isLogged" v-ripple :href="item.route" v-bind="props.action">
+        <a
+          v-else-if="(item.label === 'My profile' || item.label === 'Add photo') && isLogged"
+          v-ripple
+          :href="item.route"
+          v-bind="props.action"
+        >
           <span :class="item.icon" />
           <span class="ml-2">{{ item.label }}</span>
           <!-- <span>Debug: Login, isLogged: {{ isLogged }}</span> -->
@@ -41,7 +52,9 @@
           <!-- <span>Debug: Logout, isLogged: {{ isLogged }}</span> -->
         </a>
         <a
-          v-else-if="item.label != 'Login' && item.label != 'Logout' && item.label != 'My profile'"
+          v-else-if="
+            item.label != 'Login' && item.label != 'Add photo' && item.label != 'Logout' && item.label != 'My profile'
+          "
           v-ripple
           :href="item.route"
           :target="item.target"
@@ -66,6 +79,11 @@ export default {
           label: "Home",
           icon: "pi pi-home",
           route: "/",
+        },
+        {
+          label: "Add photo",
+          icon: "pi pi-plus-circle",
+          route: "/add",
         },
         {
           label: "My profile",
