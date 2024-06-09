@@ -56,6 +56,7 @@ import Tooltip from "primevue/tooltip";
 import InputSwitch from "primevue/inputswitch";
 import Checkbox from "primevue/checkbox";
 import Knob from "primevue/knob";
+import Paginator from "primevue/paginator";
 const app = createApp(App);
 // import VeeValidate from "vee-validate";
 
@@ -63,6 +64,7 @@ app.use(validate);
 app.use(router);
 app.use(store);
 app.component("Knob", Knob);
+app.component("Paginator", Paginator);
 app.component("InputSwitch", InputSwitch);
 app.component("Checkbox", Checkbox);
 app.component("TreeSelect", TreeSelect);

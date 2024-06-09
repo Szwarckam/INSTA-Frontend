@@ -1,12 +1,12 @@
 <template>
-  <Button
+  <!-- <Button
     severity="help"
     outlined
     icon="pi pi-arrow-circle-left"
-    @click="this.$router.push('/editor')"
+    @click="this.$router.push({ name: 'Editor', params: { name: 'image' } });"
     v-tooltip.top="'Go back'"
     class="goBackBtn2"
-  />
+  /> -->
   <div class="card flex justify-content-center karta" style="position: relative">
     <div class="flex flex-column align-items-center">
       <cropper
@@ -40,6 +40,7 @@ export default {
       l: 0,
     };
   },
+
   methods: {
     showToast(type, message) {
       this.$toast.add({ severity: type, summary: "", detail: message, life: 3000 });

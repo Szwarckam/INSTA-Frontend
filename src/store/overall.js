@@ -1,4 +1,4 @@
-import { photosList, leaveLike, tagsList, sendFilters } from "@/api";
+import { photosList, leaveLike, tagsList, sendFilters, delPhoto } from "@/api";
 
 const overall = {
   //state
@@ -92,6 +92,24 @@ const overall = {
         if (err.response) {
           console.error("Błąd serwera:", err.response.data);
           commit("SET_VISIBLE", false);
+          return err.response.data;
+        }
+      }
+      return false;
+    },
+    async DEL_PHOTO({ commit }, id) {
+      console.log("Usuwanie zdjecia");
+      commit("SET_VISIBLE", true);
+      try {
+        const response = await delPhoto(id);
+        console.log("response.data", response);
+        // commit("SET_VISIBLE", false);
+
+        return response;
+      } catch (err) {
+        if (err.response) {
+          console.error("Błąd serwera:", err.response.data);
+          // commit("SET_VISIBLE", false);
           return err.response.data;
         }
       }

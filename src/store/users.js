@@ -126,6 +126,31 @@ const users = {
         }
       }
     },
+    async POST_PROFILE_INFO({ commit }, name) {
+      console.log("POST");
+      console.log("Ustawienie visible:");
+      commit("SET_VISIBLE", true);
+      // commit("SHOW_ERROR", true);
+      // showError();
+      try {
+        const response = await profileInfo(name);
+        console.log("response.data", response);
+        commit("SET_USER_DATA", response.profileData);
+        commit("SET_BIO", response.profileData.bio);
+        // console.log(this.$store.getters.GET_EMAIL);
+        commit("SET_VISIBLE", false);
+
+        console.log(response);
+        return response;
+      } catch (err) {
+        if (err.response) {
+          console.error("Błąd serwera:", err.response.data);
+          // console.error("Komunikat o błędzie:", err.response.data.message);
+          commit("SET_VISIBLE", false);
+          return err.response.data;
+        }
+      }
+    },
     async POST_UPLOAD_PROFILE_PHOTO({ commit }, userData) {
       console.log("Wysyłanie zdjęcia profilowego");
       commit("SET_VISIBLE", true);

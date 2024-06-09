@@ -49,6 +49,7 @@ export default {
 .tags-select {
   position: absolute;
   right: 80px;
+  padding: 0;
 }
 .btn-edit2 {
   position: absolute;

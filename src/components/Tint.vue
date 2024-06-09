@@ -1,13 +1,13 @@
 <template>
   <div>
-    <Button
+    <!-- <Button
       severity="help"
       outlined
       icon="pi pi-arrow-circle-left"
       @click="this.$router.push('/editor')"
       v-tooltip.top="'Go back'"
       class="goBackBtn2"
-    />
+    /> -->
     <div class="card flex justify-content-center karta" style="position: relative">
       <div class="flex flex-column align-items-center">
         <span class="tint" :style="{ backgroundColor: `rgba(${r}, ${g}, ${b}, 0.6)` }"> </span>
@@ -50,7 +50,7 @@ export default {
       console.log(result);
       if (result) {
         this.showToast("success", "Success");
-        this.$router.push("/myprofile");
+        this.$router.push({ name: "detail", params: { id: result.file.id } });
       }
     },
   },
@@ -73,7 +73,7 @@ export default {
   height: 400px;
   display: inline-block;
   position: absolute;
-  /* mix-blend-mode: multiply; */
+  /* mix-blend-mode: overlay; */
 }
 .karta {
   width: 80vw;

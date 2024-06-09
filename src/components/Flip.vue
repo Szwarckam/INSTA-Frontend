@@ -1,12 +1,12 @@
 <template>
-  <Button
+  <!-- <Button
     severity="help"
     outlined
     icon="pi pi-arrow-circle-left"
-    @click="this.$router.push('/editor')"
+    @click="this.$router.push({ name: 'Editor', params: { name: 'image' } });"
     v-tooltip.top="'Go back'"
     class="goBackBtn2"
-  />
+  /> -->
   <div class="card flex justify-content-center karta" style="position: relative">
     <div class="flex flex-column align-items-center">
       <img
@@ -48,13 +48,14 @@ export default {
         if (result) {
           console.log(result.file.id);
           this.showToast("success", "Success");
-          this.$router.push("/myprofile");
+          this.$router.push({ name: "detail", params: { id: result.file.id } });
         }
       } else {
         this.showToast("error", "Mark flip");
       }
     },
   },
+
   computed: {
     filterStyle() {
       if (this.flip) {

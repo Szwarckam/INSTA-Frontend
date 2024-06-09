@@ -86,14 +86,14 @@ html {
   margin-bottom: 1rem;
 }
 .goBackBtn2 {
-  margin-left: 100px;
-  margin-top: 140px;
+  margin-left: 200px;
+  margin-top: 240px;
   display: block;
   width: 120px;
   height: 60px;
   position: absolute;
   left: 140px;
-  top: 40px;
+  top: 140px;
   z-index: 20;
 }
 p {

@@ -1,5 +1,5 @@
 <template>
-  <div class="card flex justify-content-center">
+  <div class="card flex justify-content-center karta">
     <Image alt="Image" preview>
       <template #indicatoricon>
         <i class="pi pi-search"></i>

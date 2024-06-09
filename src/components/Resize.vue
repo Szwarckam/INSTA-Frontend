@@ -1,12 +1,12 @@
 <template>
-  <Button
+  <!-- <Button
     severity="help"
     outlined
     icon="pi pi-arrow-circle-left"
     @click="this.$router.push('/editor')"
     v-tooltip.top="'Go back'"
     class="goBackBtn2"
-  />
+  /> -->
   <div class="card flex justify-content-center karta" style="position: relative">
     <div class="flex flex-column align-items-center">
       <img
@@ -64,10 +64,11 @@ export default {
       console.log(result);
       if (result) {
         this.showToast("success", "Success");
-        this.$router.push("/myprofile");
+        this.$router.push({ name: "detail", params: { id: result.file.id } });
       }
     },
   },
+
   computed: {
     getEditPhoto() {
       console.log(this.$store.getters.GET_PHOTO_TO_EDIT);

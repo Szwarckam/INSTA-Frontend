@@ -1,12 +1,13 @@
 <template>
-  <div class="card" id="addFormContainer">
-    <div class="add-photo-container">
-      <div class="flex flex-column gap-2">
-        <label for="username">Name</label>
-        <InputText id="username" v-model="name" aria-describedby="username-help" />
-
+  <div class="card flex" id="addFormContainer">
+    <div class="add-photo-container" style="margin: 0 auto">
+      <div class="flex flex-column gap-2 p-fluid">
         <FloatLabel>
-          <Chips id="tags" v-model="tags" @keyup.enter="checkTags(this.value)" />
+          <InputText id="name" v-model="name" aria-describedby="name-help" />
+          <label for="name">Name</label>
+        </FloatLabel>
+        <FloatLabel>
+          <Chips id="tags" v-model="tags" class="p-fluid" @keyup.enter="checkTags(this.value)" />
           <label for="tags">Tags</label>
         </FloatLabel>
         <Editor v-model="desc" editorStyle="min-height: 320px" class="mb-2" />
@@ -19,6 +20,7 @@
         @uploader="customBase64Uploader"
         :multiple="false"
         accept="image/*"
+        style="width: 500px"
         :maxFileSize="1000000"
         @select="onSelectedFiles"
       >
@@ -52,6 +54,7 @@
             </ProgressBar>
           </div>
         </template>
+
         <template #content="{ files, uploadedFiles, removeUploadedFileCallback, removeFileCallback }">
           <div v-if="files.length > 0">
             <h5>Pending</h5>
@@ -144,8 +147,9 @@ export default {
       const uniqueTags = new Set();
 
       for (let i = 0; i < this.tags.length; i++) {
-        if (this.tags[i][0] !== "#") {
+        if (this.tags[i][0] !== "#" && this.tags[i].toString() != "") {
           this.tags[i] = "#" + this.tags[i];
+          console.log(this.tags[i]);
         }
         uniqueTags.add(this.tags[i]);
       }
@@ -160,7 +164,7 @@ export default {
       formData.append("file", this.files[0], this.files[0].name);
       formData.append("title", this.name);
       formData.append("desc", this.desc);
-      formData.append("tags", this.tags);
+      formData.append("tags", this.tags[0] != "#" ? this.tags : []);
 
       try {
         const token = this.$store.getters.GET_TOKEN;

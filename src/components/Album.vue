@@ -16,14 +16,15 @@
           <h1 @click="this.$router.push({ name: 'detail', params: { id: photo.id } })">
             Title: {{ photo.originalName }}
           </h1>
-          <Button
+          <!-- <Button
             icon="pi pi-times"
             severity="danger"
             aria-label="Cancel"
             @click="removePhoto(photo.id)"
             class="delete-btn"
-          /></div
-      ></template>
+          /> -->
+        </div></template
+      >
 
       <template #content class="content-container">
         <div class="image-container">
@@ -36,7 +37,7 @@
       <template #footer>
         <div class="flex gap-3 mt-1">
           <Button severity="help" label="Show Likes" @click="seeLikes(photo.id)" class="w-full" />
-          <Button severity="secondary" label="Edit" @click="editPhoto(photo.id)" class="w-full" />
+          <!-- <Button severity="secondary" label="Edit" @click="editPhoto(photo.id)" class="w-full" /> -->
         </div>
       </template>
     </Card>
@@ -49,7 +50,7 @@
         <div v-else><span class="pi pi-user mr-2"></span>{{ like }}</div>
       </div>
     </div>
-    <div v-else>Nobody likes ur photo :(</div>
+    <div v-else>Nobody likes this photo :(</div>
     <div class="flex justify-content-end gap-2">
       <!-- <Button type="button" label="Cancel" severity="secondary" @click="visible = false"></Button> -->
     </div>
@@ -109,13 +110,14 @@ export default {
       likeList: null,
     };
   },
+  props: ["name"],
   components: {
     TagsSelect,
   },
   computed: {
     photosList() {
-      console.log(this.$store.getters.GET_PHOTOS.filter((el) => el.album == this.$store.getters.GET_EMAIL));
-      return this.$store.getters.GET_PHOTOS.filter((el) => el.album == this.$store.getters.GET_EMAIL);
+      console.log(this.$store.getters.GET_PHOTOS.filter((el) => el.album == this.name));
+      return this.$store.getters.GET_PHOTOS.filter((el) => el.album == this.name);
     },
     tags() {
       return this.$store.getters.GET_FIND_PHOTOS_BY;

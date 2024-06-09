@@ -65,6 +65,30 @@ const patch = async (url, object) => {
   });
 };
 
+const del = async (url) => {
+  return new Promise(async (resolve, reject) => {
+    console.log(store.getters.GET_TOKEN);
+    setTimeout(async () => {
+      try {
+        const headers = { Authorization: ` ${store.getters.GET_TOKEN}` };
+        const response = await axios.delete(url, { headers });
+        console.log("axios", response.data);
+        resolve(response.data);
+      } catch (err) {
+        // Uncomment these lines for detailed error logging
+        if (err.response) {
+          console.error("Błąd serwera:", err.response.data);
+        } else if (err.request) {
+          console.error("Brak odpowiedzi od serwera:", err.request);
+        } else {
+          console.error("Błąd w konfiguracji żądania:", err.message);
+        }
+        reject(err);
+      }
+    }, 200);
+  });
+};
+
 const registerUser = (object) => post("http://localhost:3000/api/user/register", object);
 const loginUser = (object) => post("http://localhost:3000/api/user/login", object);
 const changePassword = (object) => post("http://localhost:3000/api/user/changepass", object);
@@ -73,7 +97,9 @@ const changeUserData = (object) => patch("http://localhost:3000/api/profile", ob
 const logoutUser = (token) => get("http://localhost:3000/api/logout", token);
 const leaveLike = (object) => post("http://localhost:3000/api/photos/like", object);
 const profileInfo = (email) => get(`http://localhost:3000/api/profile/${email}`);
+const delPhoto = (id) => del(`http://localhost:3000/api/photos/${id}`);
 const myProfileInfo = () => get(`http://localhost:3000/api/profile`);
+// const profileInfo = () => get(`http://localhost:3000/api/profile`);
 const photosList = () => get("http://localhost:3000/api/photos");
 const tagsList = () => get("http://localhost:3000/api/tags/raw");
 const sendFilters = (data) => patch("http://localhost:3000/api/filters", data);
@@ -89,4 +115,5 @@ export {
   changeUserData,
   photosList,
   leaveLike,
+  delPhoto,
 };

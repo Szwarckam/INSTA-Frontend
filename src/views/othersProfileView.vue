@@ -1,0 +1,59 @@
+<template>
+  <div class="photos-container">
+    <UserInfo :name="name" />
+    <!-- <p>{{ name }}</p> -->
+    <!-- <Galleria /> -->
+    <Album :name="name" />
+  </div>
+</template>
+<style></style>
+<script>
+import Album from "@/components/Album.vue";
+import UserInfo from "@/components/UserInfo.vue";
+// import Galleria from "@/components/Galleria.vue";
+export default {
+  components: {
+    Album,
+    UserInfo,
+    // Galleria,
+  },
+  props: ["name"],
+  data() {
+    return {
+      active: 0,
+    };
+  },
+  methods: {
+    showToast(type, message) {
+      this.$toast.add({ severity: type, summary: "", detail: message, life: 3000 });
+    },
+  },
+  computed: {},
+  async created() {
+    // console.log(this.$store.getters.GET_TOKEN);
+    // if (this.$store.getters.GET_TOKEN == "") {
+    //   this.showToast("info", "You must be logged in");
+    //   this.$router.push("/login");
+    //   return;
+    // }
+    console.log("Created");
+    const result2 = await this.$store.dispatch("POST_MY_PROFILE_INFO");
+    console.log(result2);
+    // if (result2.status == "403") {
+    //   this.showToast("info", "You must be logged in");
+    //   this.$router.push("/login");
+    //   console.log("Wyloguj");
+    // }
+
+    const result = await this.$store.dispatch("GET_PHOTOS_LIST");
+    console.log(result);
+  },
+};
+</script>
+<style>
+.photos-container {
+  width: calc(100vw - 40px);
+  margin: 20px;
+  /* margin-top: 80px; */
+}
+</style>

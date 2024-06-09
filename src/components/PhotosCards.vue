@@ -13,7 +13,9 @@
         <div class="title">Title: {{ photo.originalName }}</div>
       </template>
       <template #subtitle>
-        <div class="author">Author: {{ photo.authorName }} {{ photo.authorLastName }}</div>
+        <div class="author" v-tooltip.top="`See ${photo.album}'s profile`" @click="seeProfile(photo.album)">
+          Author: {{ photo.authorName }} {{ photo.authorLastName }}
+        </div>
       </template>
       <template #content class="content-container">
         <div class="image-container">
@@ -72,6 +74,9 @@ export default {
     },
   },
   methods: {
+    seeProfile(userName) {
+      this.$router.push({ name: "profile", params: { name: userName } });
+    },
     getLikesNum(id) {
       const photo = this.$store.getters.GET_PHOTOS.find((el) => el.id == id);
       return photo.likes.length > 0 ? photo.likes.length : null;

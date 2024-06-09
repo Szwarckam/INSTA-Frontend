@@ -17,14 +17,15 @@ const Auth = () => import("@/views/AuthView.vue");
 const MyProfile = () => import("@/views/MyProfileView.vue");
 const Detail = () => import("@/views/DetailView.vue");
 const AddPhoto = () => import("@/views/AddPhotoView.vue");
-const Rotate = () => import("@/components/Rotate.vue");
-const Resize = () => import("@/components/Resize.vue");
-const Reformat = () => import("@/components/Reformat.vue");
-const Grayscale = () => import("@/components/Grayscale.vue");
-const Flip = () => import("@/components/Flip.vue");
-const Negate = () => import("@/components/Negate.vue");
-const Tint = () => import("@/components/Tint.vue");
-const Croper = () => import("@/components/Croper.vue");
+const Profile = () => import("@/views/othersProfileView.vue");
+// const Rotate = () => import("@/components/Rotate.vue");
+// const Resize = () => import("@/components/Resize.vue");
+// const Reformat = () => import("@/components/Reformat.vue");
+// const Grayscale = () => import("@/components/Grayscale.vue");
+// const Flip = () => import("@/components/Flip.vue");
+// const Negate = () => import("@/components/Negate.vue");
+// const Tint = () => import("@/components/Tint.vue");
+// const Croper = () => import("@/components/Croper.vue");
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -38,11 +39,11 @@ const router = createRouter({
       name: "about",
       component: About,
     },
-    {
-      path: "/editor",
-      name: "editor",
-      component: Editor,
-    },
+    // {
+    //   path: "/editor",
+    //   name: "editor",
+    //   component: Editor,
+    // },
     {
       path: "/settings",
       name: "settings",
@@ -80,45 +81,57 @@ const router = createRouter({
       component: Auth,
     },
     {
-      path: "/rotate",
-      name: "rotate",
-      component: Rotate,
+      path: "/editor/:name",
+      name: "Editor",
+      component: Editor,
+      props: true,
     },
     {
-      path: "/reformat",
-      name: "reformat",
-      component: Reformat,
+      path: "/profile/:name",
+      name: "profile",
+      component: Profile,
+      props: true,
     },
-    {
-      path: "/grayscale",
-      name: "grayscale",
-      component: Grayscale,
-    },
-    {
-      path: "/crop",
-      name: "crop",
-      component: Croper,
-    },
-    {
-      path: "/flip",
-      name: "flip",
-      component: Flip,
-    },
-    {
-      path: "/negate",
-      name: "negate",
-      component: Negate,
-    },
-    {
-      path: "/tint",
-      name: "tint",
-      component: Tint,
-    },
-    {
-      path: "/resize",
-      name: "resize",
-      component: Resize,
-    },
+    // {
+    //   path: "/rotate",
+    //   name: "rotate",
+    //   component: Rotate,
+    // },
+    // {
+    //   path: "/reformat",
+    //   name: "reformat",
+    //   component: Reformat,
+    // },
+    // {
+    //   path: "/grayscale",
+    //   name: "grayscale",
+    //   component: Grayscale,
+    // },
+    // {
+    //   path: "/crop",
+    //   name: "crop",
+    //   component: Croper,
+    // },
+    // {
+    //   path: "/flip",
+    //   name: "flip",
+    //   component: Flip,
+    // },
+    // {
+    //   path: "/negate",
+    //   name: "negate",
+    //   component: Negate,
+    // },
+    // {
+    //   path: "/tint",
+    //   name: "tint",
+    //   component: Tint,
+    // },
+    // {
+    //   path: "/resize",
+    //   name: "resize",
+    //   component: Resize,
+    // },
     {
       path: "/:pathMatch(.*)*",
       name: "NotFoundView",
