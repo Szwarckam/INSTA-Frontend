@@ -2,7 +2,7 @@
   <Toast />
   <div class="main-container">
     <Card class="login-container">
-      <template #title>Login</template>
+      <template #title>Register</template>
       <template #content>
         <InputGroup>
           <FloatLabel>

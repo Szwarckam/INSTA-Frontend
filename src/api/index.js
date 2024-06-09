@@ -92,6 +92,7 @@ const del = async (url) => {
 const registerUser = (object) => post("http://localhost:3000/api/user/register", object);
 const loginUser = (object) => post("http://localhost:3000/api/user/login", object);
 const changePassword = (object) => post("http://localhost:3000/api/user/changepass", object);
+const resetPassword = (object) => post("http://localhost:3000/api/user/resetpass", object);
 // const upladProfilePhoto = (object) => post("http://localhost:3000/api/profile", object);
 const changeUserData = (object) => patch("http://localhost:3000/api/profile", object);
 const logoutUser = (token) => get("http://localhost:3000/api/logout", token);
@@ -116,4 +117,5 @@ export {
   photosList,
   leaveLike,
   delPhoto,
+  resetPassword,
 };

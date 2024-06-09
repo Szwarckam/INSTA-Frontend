@@ -35,6 +35,7 @@
         </span>
         <div class="bottom">
           <span> You don't have an account yet? <RouterLink to="/register" exact>Register</RouterLink> now</span>
+          <span> You forgot your password? <RouterLink to="/resetPass" exact>Restet password</RouterLink> now</span>
           <Button label="Submit" @click="loginUser" class="mt-4 btn" />
         </div>
       </template>
@@ -60,7 +61,7 @@ export default {
     console.log("Created");
     console.log(this.$store.getters.GET_TOKEN);
     if (this.$store.getters.GET_TOKEN !== "") {
-      showToast("info", "You are already logged in");
+      this.showToast("info", "You are already logged in");
       this.$router.push("/");
     }
   },
@@ -93,11 +94,16 @@ export default {
           password: this.pass,
         });
         console.log(result);
-        if (result.status == 404) {
+        if (result.status >= 400 && result.status < 500) {
           this.showToast("error", result.message);
         } else if (result.status >= 200 && result.status < 300) {
-          this.showToast("success", result.message);
-          this.$router.push("/");
+          if (result.token.changePass) {
+            this.showToast("info", "Please change your password");
+            this.$router.push("/");
+          } else {
+            this.showToast("success", result.message);
+            this.$router.push("/");
+          }
         }
       }
     },

@@ -18,6 +18,7 @@ const MyProfile = () => import("@/views/MyProfileView.vue");
 const Detail = () => import("@/views/DetailView.vue");
 const AddPhoto = () => import("@/views/AddPhotoView.vue");
 const Profile = () => import("@/views/othersProfileView.vue");
+const ResetPass = () => import("@/components/ResetPass.vue");
 // const Rotate = () => import("@/components/Rotate.vue");
 // const Resize = () => import("@/components/Resize.vue");
 // const Reformat = () => import("@/components/Reformat.vue");
@@ -79,6 +80,11 @@ const router = createRouter({
       path: "/auth",
       name: "auth",
       component: Auth,
+    },
+    {
+      path: "/resetPass",
+      name: "ResetPass",
+      component: ResetPass,
     },
     {
       path: "/editor/:name",
